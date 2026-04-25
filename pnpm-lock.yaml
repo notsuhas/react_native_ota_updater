@@ -67,15 +67,6 @@ importers:
       '@hookform/resolvers':
         specifier: ^5.2.2
         version: 5.2.2(react-hook-form@7.73.1(react@19.2.5))
-      '@rentlydev/rnota-api':
-        specifier: workspace:*
-        version: link:../../packages/api
-      '@rentlydev/rnota-api-client':
-        specifier: workspace:*
-        version: link:../../shared/api-client
-      '@rentlydev/rnota-auth':
-        specifier: workspace:*
-        version: link:../../internal/auth
       '@radix-ui/react-alert-dialog':
         specifier: ^1.1.15
         version: 1.1.15(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
@@ -118,6 +109,15 @@ importers:
       '@radix-ui/react-tooltip':
         specifier: ^1.2.8
         version: 1.2.8(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
+      '@rentlydev/rnota-api':
+        specifier: workspace:*
+        version: link:../../packages/api
+      '@rentlydev/rnota-api-client':
+        specifier: workspace:*
+        version: link:../../shared/api-client
+      '@rentlydev/rnota-auth':
+        specifier: workspace:*
+        version: link:../../internal/auth
       '@t3-oss/env-nextjs':
         specifier: 'catalog:'
         version: 0.13.11(typescript@6.0.3)(zod@4.3.6)
@@ -445,15 +445,15 @@ importers:
       '@listr2/prompt-adapter-enquirer':
         specifier: ^4.2.1
         version: 4.2.1(enquirer@2.4.1)(listr2@10.2.1)
-      '@rentlydev/rnota-api-client':
-        specifier: workspace:*
-        version: link:../../shared/api-client
       '@oclif/core':
         specifier: ^4.10.5
         version: 4.10.5
       '@oclif/plugin-help':
         specifier: ^6.2.44
         version: 6.2.44
+      '@rentlydev/rnota-api-client':
+        specifier: workspace:*
+        version: link:../../shared/api-client
       axios:
         specifier: ^1.15.2
         version: 1.15.2
@@ -515,12 +515,12 @@ importers:
         specifier: ^3.3.1
         version: 3.3.1
     devDependencies:
-      '@rentlydev/rnota-tsconfig':
-        specifier: workspace:*
-        version: link:../../tooling/typescript
       '@oclif/test':
         specifier: ^4.1.18
         version: 4.1.18(@oclif/core@4.10.5)
+      '@rentlydev/rnota-tsconfig':
+        specifier: workspace:*
+        version: link:../../tooling/typescript
       '@types/chai':
         specifier: ^5.2.3
         version: 5.2.3

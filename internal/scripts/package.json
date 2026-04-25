@@ -2,7 +2,7 @@
 	"name": "@rentlydev/rnota-scripts",
 	"type": "module",
 	"private": true,
-	"version": "2.0.0",
+	"version": "3.0.0",
 	"description": "Database migration scripts",
 	"scripts": {
 		"db:migrate:prod": "tsx migrate.ts"
