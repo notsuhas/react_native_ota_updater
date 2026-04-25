@@ -5,13 +5,12 @@
  */
 
 import type { OpenAPIHono } from "@hono/zod-openapi";
+
 // import type { OpenAPIHono, RouteConfig, RouteHandler } from "@hono/zod-openapi";
 
-import type { PinoLogger } from "hono-pino";
-
-import type { StorageManager } from "@rentlydev/rnota-db";
-import type { TAccessKey, TUser } from "@rentlydev/rnota-db";
+import type { StorageManager, TAccessKey, TUser } from "@rentlydev/rnota-db";
 import type { RedisManager } from "@rentlydev/rnota-redis";
+import type { PinoLogger } from "hono-pino";
 
 import type { BASE_API_PATH } from "@/api/lib/constants";
 
@@ -58,7 +57,7 @@ export interface AppBindings {
  *
  * @typedef {OpenAPIHono<AppBindings, {}, typeof BASE_API_PATH>} AppOpenAPI
  */
-// biome-ignore lint/complexity/noBannedTypes: <explanation>
+// biome-ignore lint/complexity/noBannedTypes: OpenAPIHono requires `{}` as the Schemas generic to enable its path-aware request helpers
 export type AppOpenAPI = OpenAPIHono<AppBindings, {}, typeof BASE_API_PATH>;
 
 /**

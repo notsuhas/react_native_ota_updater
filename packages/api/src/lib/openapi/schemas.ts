@@ -57,5 +57,5 @@ export const textContent = <T extends ZodSchema>(schema: T, description: string)
  * ```
  */
 export const createMessageSchema = (exampleError = "Example Message") => {
-	return z.string().openapi({ example: exampleError });
+	return z.string().meta({ example: exampleError });
 };
