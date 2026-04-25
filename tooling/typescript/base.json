@@ -1,31 +1,26 @@
 {
-  "$schema": "https://json.schemastore.org/tsconfig",
-  "compilerOptions": {
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "target": "ES2022",
-    "lib": [
-      "ES2022"
-    ],
-    "allowJs": true,
-    "resolveJsonModule": true,
-    "moduleDetection": "force",
-    "isolatedModules": true,
-    "incremental": true,
-    "disableSourceOfProjectReferenceRedirect": false,
-    "tsBuildInfoFile": "${configDir}/.cache/tsbuildinfo.json",
-    "strict": true,
-    "noUncheckedIndexedAccess": true,
-    "forceConsistentCasingInFileNames": true,
-    "checkJs": true,
-    "module": "Preserve",
-    "moduleResolution": "Bundler",
-    "noEmit": true
-  },
-  "exclude": [
-    "node_modules",
-    "build",
-    "dist",
-    ".next"
-  ]
+	"$schema": "https://json.schemastore.org/tsconfig",
+	"compilerOptions": {
+		"esModuleInterop": true,
+		"skipLibCheck": true,
+		"target": "ES2022",
+		"lib": ["ES2022", "DOM", "DOM.Iterable"],
+		"types": ["node"],
+		"allowJs": true,
+		"ignoreDeprecations": "6.0",
+		"resolveJsonModule": true,
+		"moduleDetection": "force",
+		"isolatedModules": true,
+		"incremental": true,
+		"disableSourceOfProjectReferenceRedirect": false,
+		"tsBuildInfoFile": "${configDir}/.cache/tsbuildinfo.json",
+		"strict": true,
+		"noUncheckedIndexedAccess": true,
+		"forceConsistentCasingInFileNames": true,
+		"checkJs": true,
+		"module": "Preserve",
+		"moduleResolution": "Bundler",
+		"noEmit": true
+	},
+	"exclude": ["node_modules", "build", "dist", ".next"]
 }
