@@ -1,5 +1,8 @@
 "use client";
 
+import { DialogTrigger } from "@radix-ui/react-dialog";
+import { useState } from "react";
+import { toast } from "sonner";
 import { Button } from "@/web/components/ui/button";
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "@/web/components/ui/dialog";
 import { Input } from "@/web/components/ui/input";
@@ -8,9 +11,6 @@ import { Slider } from "@/web/components/ui/slider";
 import { Switch } from "@/web/components/ui/switch";
 import { Textarea } from "@/web/components/ui/textarea";
 import { useUpdateReleaseMutation } from "@/web/lib/client/codepush-queries";
-import { DialogTrigger } from "@radix-ui/react-dialog";
-import { useState } from "react";
-import { toast } from "sonner";
 
 type Release = {
 	id: number;
@@ -139,7 +139,7 @@ export function EditReleaseDialog({ release }: EditReleaseDialogProps) {
 									className="w-20 text-sm border rounded-md px-2 py-1"
 									value={editedRelease.rollout ?? 100}
 									onChange={(e) => {
-										const value = Number.parseInt(e.target.value);
+										const value = Number.parseInt(e.target.value, 10);
 										if (!Number.isNaN(value) && value >= 1 && value <= 100) {
 											setEditedRelease({ ...editedRelease, rollout: value });
 										} else if (e.target.value === "") {

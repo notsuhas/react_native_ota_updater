@@ -20,7 +20,7 @@ $ npm install -g @rentlydev/rnota-cli
 $ rnota COMMAND
 running command...
 $ rnota (--version)
-@rentlydev/rnota-cli/2.0.0 darwin-arm64 node-v22.17.1
+@rentlydev/rnota-cli/2.0.0 darwin-arm64 node-v22.18.0
 $ rnota --help [COMMAND]
 USAGE
   $ rnota COMMAND
@@ -704,7 +704,7 @@ USAGE
   $ rnota help [COMMAND...] [-n]
 
 ARGUMENTS
-  COMMAND...  Command to show help for.
+  [COMMAND...]  Command to show help for.
 
 FLAGS
   -n, --nested-commands  Include all nested commands in the output.
@@ -713,7 +713,7 @@ DESCRIPTION
   Display help for rnota.
 ```
 
-_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v6.2.25/src/commands/help.ts)_
+_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/6.2.44/src/commands/help.ts)_
 
 ## `rnota login`
 

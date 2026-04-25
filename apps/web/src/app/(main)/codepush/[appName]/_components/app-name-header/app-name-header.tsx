@@ -1,10 +1,12 @@
 "use client";
 
-import { getAppQueryOptions } from "@/web/lib/client/codepush-queries";
 import { useSuspenseQuery } from "@tanstack/react-query";
+import { useRequiredCodePushAppName } from "@/web/hooks/use-codepush-route";
+import { getAppQueryOptions } from "@/web/lib/client/codepush-queries";
 
 export default function AppHeader() {
-	const { data: app } = useSuspenseQuery(getAppQueryOptions());
+	const appName = useRequiredCodePushAppName();
+	const { data: app } = useSuspenseQuery(getAppQueryOptions({ appName }));
 
 	if (!app) {
 		return null;

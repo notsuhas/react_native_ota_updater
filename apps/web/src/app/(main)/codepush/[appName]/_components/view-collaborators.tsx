@@ -1,12 +1,12 @@
 "use client";
 
-import { Button } from "@/web/components/ui/button";
-import { useAppName } from "@/web/store/store";
 import { Users } from "lucide-react";
 import Link from "next/link";
+import { Button } from "@/web/components/ui/button";
+import { useRequiredCodePushAppName } from "@/web/hooks/use-codepush-route";
 
 export default function ViewCollaborators() {
-	const appName = useAppName();
+	const appName = useRequiredCodePushAppName();
 
 	return (
 		<>

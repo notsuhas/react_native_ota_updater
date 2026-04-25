@@ -13,7 +13,7 @@ export default function AppsListLoading() {
 
 			<TableBody>
 				{Array.from({ length: 10 }).map((_, index) => (
-					// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+					// biome-ignore lint/suspicious/noArrayIndexKey: static skeleton placeholder, no reorder possible
 					<TableRow key={index}>
 						<TableCell>
 							<div className="flex items-center gap-3">

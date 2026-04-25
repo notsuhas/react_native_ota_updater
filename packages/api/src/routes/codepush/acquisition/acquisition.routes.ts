@@ -20,13 +20,12 @@
  * @module CodePushAcquisition
  */
 
-import { createRouter } from "@/api/lib/create/router";
 import { createRoute } from "@hono/zod-openapi";
 import * as HttpStatusCodes from "stoker/http-status-codes";
 import { jsonContent } from "stoker/openapi/helpers";
 import { createMessageObjectSchema } from "stoker/openapi/schemas";
-
 import { ACQUISITION_CODEPUSH_PUBLIC_PATH } from "@/api/lib/constants";
+import { createRouter } from "@/api/lib/create/router";
 import { STRINGS } from "@/api/utils/strings";
 
 import { ReportDeployRoute } from "./deploy.route";

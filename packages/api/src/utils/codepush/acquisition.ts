@@ -19,16 +19,14 @@
  * mandatory updates by updating directly to a later optional update.
  */
 
-import * as semver from "semver";
-
 import { getDownloadUrlByKey } from "@rentlydev/rnota-aws";
 import type { TCodePushRelease } from "@rentlydev/rnota-db";
-
 import type {
 	UpdateCheckReleaseCacheResponseType,
 	UpdateCheckReleaseResponseType,
 	UpdateCheckReleaseType,
 } from "@rentlydev/rnota-redis/types";
+import * as semver from "semver";
 
 import { isUnfinishedRollout } from "@/api/utils/codepush/rollout-selector";
 import type { UpdateCheckRequestQueryType } from "../../schemas/update-check";
@@ -186,8 +184,8 @@ function getUpdatePackage(
 	}
 
 	let foundRequestPackageInHistory = false;
-	let latestSatisfyingEnabledPackage: TCodePushRelease | undefined = undefined;
-	let latestEnabledPackage: TCodePushRelease | undefined = undefined;
+	let latestSatisfyingEnabledPackage: TCodePushRelease | undefined;
+	let latestEnabledPackage: TCodePushRelease | undefined;
 	let rollout: number | null | undefined = null;
 	let shouldMakeUpdateMandatory = false;
 	const isBinaryRequest = !request.label && !request.package_hash; // When Client freshly installs the app, it doesn't send any label and package_hash
@@ -267,9 +265,9 @@ function getUpdatePackage(
 	}
 
 	updateDetails.isAvailable = true;
-	updateDetails.downloadURL = getDownloadUrlByKey(latestSatisfyingEnabledPackage?.blobId!);
+	updateDetails.downloadURL = getDownloadUrlByKey(latestSatisfyingEnabledPackage?.blobId ?? "");
 	updateDetails.packageSize = latestSatisfyingEnabledPackage?.size;
-	updateDetails.description = latestSatisfyingEnabledPackage?.description!;
+	updateDetails.description = latestSatisfyingEnabledPackage?.description ?? "";
 	// If there was a mandatory update between current version and latest version,
 	// make the latest version mandatory, otherwise keep its original mandatory status
 	updateDetails.isMandatory = shouldMakeUpdateMandatory || latestSatisfyingEnabledPackage?.isMandatory;

@@ -15,7 +15,7 @@ export function CollaboratorsTableSkeleton() {
 				</TableHeader>
 				<TableBody>
 					{Array.from({ length: 10 }).map((_, index) => (
-						// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+						// biome-ignore lint/suspicious/noArrayIndexKey: static skeleton placeholder, no reorder possible
 						<TableRow key={index}>
 							{/* User column with avatar and name skeletons */}
 							<TableCell className="font-medium">

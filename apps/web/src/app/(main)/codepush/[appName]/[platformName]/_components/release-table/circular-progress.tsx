@@ -23,7 +23,7 @@ export function CircularProgress({
 
 	return (
 		<div className="relative" style={{ width: size, height: size }}>
-			{/* biome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
+			{/* biome-ignore lint/a11y/noSvgWithoutTitle: decorative progress ring, no semantic meaning */}
 			<svg className="transform -rotate-90" style={{ width: size, height: size }}>
 				<circle
 					className="text-muted-foreground/20"

@@ -17,12 +17,10 @@ import fs from "node:fs";
 import path from "node:path";
 import type { InferRequestType, InferResponseType } from "hono";
 import slash from "slash";
-
+import yazl from "yazl";
 import { isIgnored, readDirectoryRecursive } from "../lib/file-system.js";
 import { honoApiClient } from "./api-client.js";
 import { handleError } from "./errors.js";
-
-import yazl from "yazl";
 
 /**
  * Represents a package file in the CodePush system

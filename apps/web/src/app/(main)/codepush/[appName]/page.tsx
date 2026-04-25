@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import ViewDeploymentKeys from "@/web/components/apps-page/list-keys";
 import AddNewDeployment from "./_components/add-new-deployment";
 import AppHeader from "./_components/app-name-header/app-name-header";
 import AppHeaderSkeleton from "./_components/app-name-header/app-name-header-loading";
@@ -6,8 +7,6 @@ import { Endpoint } from "./_components/endpoint";
 import PlatformsList from "./_components/platforms-list/platforms-list";
 import PlatformsListSkeleton from "./_components/platforms-list/platforms-list-loading";
 import ViewCollaborators from "./_components/view-collaborators";
-
-import ViewDeploymentKeys from "@/web/components/apps-page/list-keys";
 
 export default async function AppDetailsPage() {
 	return (

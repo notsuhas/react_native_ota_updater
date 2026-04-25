@@ -1,15 +1,15 @@
 "use client";
 
-import { Table, TableBody, TableHead, TableHeader, TableRow } from "@/web/components/ui/table";
-import { getCollaboratorsQueryOptions } from "@/web/lib/client/codepush-queries";
-import { useAppName } from "@/web/store/store";
 import { useSuspenseQuery } from "@tanstack/react-query";
+import { Table, TableBody, TableHead, TableHeader, TableRow } from "@/web/components/ui/table";
+import { useRequiredCodePushAppName } from "@/web/hooks/use-codepush-route";
+import { getCollaboratorsQueryOptions } from "@/web/lib/client/codepush-queries";
 import { CollaboratorRow } from "./collaborator-row";
 
 export function CollaboratorsTable() {
-	const appName = useAppName();
+	const appName = useRequiredCodePushAppName();
 
-	const { data: collaborators } = useSuspenseQuery(getCollaboratorsQueryOptions());
+	const { data: collaborators } = useSuspenseQuery(getCollaboratorsQueryOptions({ appName }));
 
 	if (!collaborators?.length) {
 		return (

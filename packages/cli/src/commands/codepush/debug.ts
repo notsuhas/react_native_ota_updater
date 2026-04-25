@@ -8,6 +8,61 @@ import which from "which";
 import { BaseCommand } from "../../common/base-command.js";
 import type { Platform } from "../../services/codepush-sdk.js";
 
+interface IDebugPlatform {
+	getLogProcess(): childProcess.ChildProcess;
+	normalizeLogMessage(message: string): string;
+}
+
+class AndroidDebugPlatform implements IDebugPlatform {
+	getLogProcess(): childProcess.ChildProcess {
+		try {
+			which.sync("adb");
+		} catch {
+			throw new Error("ADB command not found. Install Android Platform Tools");
+		}
+
+		const deviceCount = this.getAvailableDeviceCount();
+		if (deviceCount === 0) throw new Error("No Android devices found");
+		if (deviceCount > 1) throw new Error("Multiple devices detected - connect only one");
+
+		return childProcess.spawn("adb", ["logcat"]);
+	}
+
+	private getAvailableDeviceCount(): number {
+		const output = childProcess.execSync("adb devices").toString();
+		return (output.match(/\bdevice\b/g) || []).length;
+	}
+
+	normalizeLogMessage(message: string): string {
+		const sourceUrlIndex = message.indexOf('", source: file:///');
+		return sourceUrlIndex > -1 ? message.substring(0, sourceUrlIndex) : message;
+	}
+}
+
+// class IOSDebugPlatform implements IDebugPlatform {
+// 	getLogProcess(): childProcess.ChildProcess {
+// 		if (process.platform !== "darwin") {
+// 			throw new Error("iOS debugging requires macOS");
+// 		}
+
+// 		const simulatorId = this.getBootedSimulatorId();
+// 		if (!simulatorId) throw new Error("No booted iOS simulators found");
+
+// 		const logPath = path.join(process.env.HOME!, "Library/Logs/CoreSimulator", simulatorId, "system.log");
+
+// 		return childProcess.spawn("tail", ["-f", logPath]);
+// 	}
+
+// 	private getBootedSimulatorId(): string | undefined {
+// 		const { devices } = simctl.list({ devices: true, silent: true }).json;
+// 		return devices.flatMap((platform: any) => platform.devices).find((device: any) => device.state === "Booted")?.id;
+// 	}
+
+// 	normalizeLogMessage(message: string): string {
+// 		return message;
+// 	}
+// }
+
 export default class CodepushDebug extends BaseCommand<typeof CodepushDebug> {
 	static override description = "View CodePush debug logs from Android/iOS devices/simulators";
 
@@ -69,58 +124,3 @@ export default class CodepushDebug extends BaseCommand<typeof CodepushDebug> {
 			});
 	}
 }
-
-interface IDebugPlatform {
-	getLogProcess(): childProcess.ChildProcess;
-	normalizeLogMessage(message: string): string;
-}
-
-class AndroidDebugPlatform implements IDebugPlatform {
-	getLogProcess(): childProcess.ChildProcess {
-		try {
-			which.sync("adb");
-		} catch {
-			throw new Error("ADB command not found. Install Android Platform Tools");
-		}
-
-		const deviceCount = this.getAvailableDeviceCount();
-		if (deviceCount === 0) throw new Error("No Android devices found");
-		if (deviceCount > 1) throw new Error("Multiple devices detected - connect only one");
-
-		return childProcess.spawn("adb", ["logcat"]);
-	}
-
-	private getAvailableDeviceCount(): number {
-		const output = childProcess.execSync("adb devices").toString();
-		return (output.match(/\bdevice\b/g) || []).length;
-	}
-
-	normalizeLogMessage(message: string): string {
-		const sourceUrlIndex = message.indexOf('", source: file:///');
-		return sourceUrlIndex > -1 ? message.substring(0, sourceUrlIndex) : message;
-	}
-}
-
-// class IOSDebugPlatform implements IDebugPlatform {
-// 	getLogProcess(): childProcess.ChildProcess {
-// 		if (process.platform !== "darwin") {
-// 			throw new Error("iOS debugging requires macOS");
-// 		}
-
-// 		const simulatorId = this.getBootedSimulatorId();
-// 		if (!simulatorId) throw new Error("No booted iOS simulators found");
-
-// 		const logPath = path.join(process.env.HOME!, "Library/Logs/CoreSimulator", simulatorId, "system.log");
-
-// 		return childProcess.spawn("tail", ["-f", logPath]);
-// 	}
-
-// 	private getBootedSimulatorId(): string | undefined {
-// 		const { devices } = simctl.list({ devices: true, silent: true }).json;
-// 		return devices.flatMap((platform: any) => platform.devices).find((device: any) => device.state === "Booted")?.id;
-// 	}
-
-// 	normalizeLogMessage(message: string): string {
-// 		return message;
-// 	}
-// }

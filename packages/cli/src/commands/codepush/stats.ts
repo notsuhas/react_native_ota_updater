@@ -6,9 +6,8 @@
  * @module commands/codepush/stats
  */
 
-import { Listr } from "listr2";
-
 import CliTable3 from "cli-table3";
+import { Listr } from "listr2";
 import { EnsureAuthCommand } from "../../common/ensure-auth-command.js";
 import { sdk } from "../../services/management-sdk.js";
 
@@ -101,7 +100,7 @@ export default class CodepushStats extends EnsureAuthCommand {
 				for (const deployment of deployments) {
 					const releaseCount =
 						typeof deployment.releaseCount === "string"
-							? Number.parseInt(deployment.releaseCount)
+							? Number.parseInt(deployment.releaseCount, 10)
 							: deployment.releaseCount;
 					const countDisplay = releaseCount > 0 ? `${releaseCount} releases` : "No releases";
 
@@ -174,7 +173,7 @@ export default class CodepushStats extends EnsureAuthCommand {
 		}>,
 	): void {
 		const totalReleases = stats.reduce((sum, stat) => {
-			const count = typeof stat.releaseCount === "string" ? Number.parseInt(stat.releaseCount) : stat.releaseCount;
+			const count = typeof stat.releaseCount === "string" ? Number.parseInt(stat.releaseCount, 10) : stat.releaseCount;
 			return sum + count;
 		}, 0);
 

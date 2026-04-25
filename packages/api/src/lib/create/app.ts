@@ -4,21 +4,18 @@
  * @module AppFactory
  */
 
+import { StorageManager } from "@rentlydev/rnota-db";
+import { RedisManager } from "@rentlydev/rnota-redis";
 import type { ContentfulStatusCode } from "hono/utils/http-status";
 import { INTERNAL_SERVER_ERROR, OK } from "stoker/http-status-codes";
 import { notFound, serveEmojiFavicon } from "stoker/middlewares";
-
 import { BASE_API_PATH, CODEPUSH_PATH, MANAGEMENT_PATH } from "@/api/lib/constants";
 import { createRouter } from "@/api/lib/create/router";
 import type { AppOpenAPI } from "@/api/lib/types";
-
 import { cliVersionChecker } from "@/api/middlewares/cli-version-checker";
 import { debugDelay } from "@/api/middlewares/debug-delay";
 import { ensureAuthUser } from "@/api/middlewares/ensure-auth";
 import { pinoLogger } from "@/api/middlewares/pino-logger";
-
-import { StorageManager } from "@rentlydev/rnota-db";
-import { RedisManager } from "@rentlydev/rnota-redis";
 
 /**
  * Creates and configures a new Hono application instance

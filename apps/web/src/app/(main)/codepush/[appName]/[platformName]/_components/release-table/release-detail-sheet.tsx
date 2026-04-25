@@ -1,5 +1,10 @@
 "use client";
 
+import { useQuery } from "@tanstack/react-query";
+import { format } from "date-fns";
+import { Info } from "lucide-react";
+import { useQueryStates } from "nuqs";
+import { Suspense } from "react";
 import ErrorDisplay from "@/web/components/app-error-display";
 import { Avatar, AvatarFallback, AvatarImage } from "@/web/components/ui/avatar";
 import { Badge } from "@/web/components/ui/badge";
@@ -7,14 +12,10 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/web/components/u
 import { Skeleton } from "@/web/components/ui/skeleton";
 import { Textarea } from "@/web/components/ui/textarea";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/web/components/ui/tooltip";
+import { useRequiredCodePushPlatformRoute } from "@/web/hooks/use-codepush-route";
 import { getReleaseDetailsQueryOptions } from "@/web/lib/client/codepush-queries";
 import { searchParams } from "@/web/lib/searchParams";
 import { formatBytes } from "@/web/lib/utils";
-import { useQuery } from "@tanstack/react-query";
-import { format } from "date-fns";
-import { Info } from "lucide-react";
-import { useQueryStates } from "nuqs";
-import { Suspense } from "react";
 import { CircularProgress } from "./circular-progress";
 import { EditReleaseDialog } from "./edit-release-dialog";
 import { ReleaseActions } from "./release-actions";
@@ -24,8 +25,15 @@ import ReleaseDownload, { ReleaseDownloadSkeleton } from "./release-download";
 
 export function ReleaseDetailsSheet() {
 	const [{ deployment, label }, setParams] = useQueryStates(searchParams);
+	const { appName, platformName: platform } = useRequiredCodePushPlatformRoute();
 
-	const { data: release, isPending, isError, error, dataUpdatedAt } = useQuery(getReleaseDetailsQueryOptions());
+	const {
+		data: release,
+		isPending,
+		isError,
+		error,
+		dataUpdatedAt,
+	} = useQuery(getReleaseDetailsQueryOptions({ appName, platform, deploymentName: deployment, label }));
 
 	const onClose = () => setParams({ label: null });
 
@@ -184,7 +192,7 @@ export function ReleaseDetailsSheet() {
 
 								<div>
 									<div className="text-sm text-muted-foreground">Package Hash</div>
-									<div className="font-mono break-words">{release.packageHash}</div>
+									<div className="font-mono wrap-break-word">{release.packageHash}</div>
 								</div>
 
 								<div>

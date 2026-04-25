@@ -29,9 +29,8 @@
  * @module routes/codepush
  */
 
-import { createRouter } from "@/api/lib/create/router";
-
 import { ACQUISITION_PATH, CODEPUSH_PATH, MANAGEMENT_PATH } from "@/api/lib/constants";
+import { createRouter } from "@/api/lib/create/router";
 
 import { AcquisitionCodePushRouter } from "./acquisition/acquisition.routes";
 import { ManagementCodePushRouter } from "./management/management.routes";

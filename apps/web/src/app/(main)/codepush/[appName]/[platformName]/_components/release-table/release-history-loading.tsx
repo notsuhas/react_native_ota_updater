@@ -19,7 +19,7 @@ export function ReleaseHistorySkeleton() {
 
 				<TableBody>
 					{Array.from({ length: 5 }).map((_, index) => (
-						// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+						// biome-ignore lint/suspicious/noArrayIndexKey: static skeleton placeholder, no reorder possible
 						<TableRow key={index} className="cursor-pointer hover:bg-muted/50">
 							<TableCell>
 								<div className="flex items-center gap-2">

@@ -1,21 +1,10 @@
 "use client";
 
-import { Button } from "@/web/components/ui/button";
-import {
-	Sheet,
-	SheetContent,
-	SheetDescription,
-	SheetHeader,
-	SheetTitle,
-	SheetTrigger,
-} from "@/web/components/ui/sheet";
-import {
-	getAppQueryOptions,
-	useRollDeploymentKeyMutation,
-	useSetCustomDeploymentKeyMutation,
-} from "@/web/lib/client/codepush-queries";
 import { CopyIcon, Pencil1Icon, ReloadIcon } from "@radix-ui/react-icons";
-
+import { useSuspenseQuery } from "@tanstack/react-query";
+import { useState } from "react";
+import { toast } from "sonner";
+import { Button } from "@/web/components/ui/button";
 import {
 	Dialog,
 	DialogClose,
@@ -27,14 +16,24 @@ import {
 } from "@/web/components/ui/dialog";
 import { Input } from "@/web/components/ui/input";
 import { Label } from "@/web/components/ui/label";
-import type { PlatformName } from "@/web/store/store";
-
-import { useSuspenseQuery } from "@tanstack/react-query";
-import { useState } from "react";
-import { toast } from "sonner";
+import {
+	Sheet,
+	SheetContent,
+	SheetDescription,
+	SheetHeader,
+	SheetTitle,
+	SheetTrigger,
+} from "@/web/components/ui/sheet";
+import { type PlatformName, useRequiredCodePushAppName } from "@/web/hooks/use-codepush-route";
+import {
+	getAppQueryOptions,
+	useRollDeploymentKeyMutation,
+	useSetCustomDeploymentKeyMutation,
+} from "@/web/lib/client/codepush-queries";
 
 export default function ViewDeploymentKeys() {
-	const { data: app } = useSuspenseQuery(getAppQueryOptions());
+	const appName = useRequiredCodePushAppName();
+	const { data: app } = useSuspenseQuery(getAppQueryOptions({ appName }));
 
 	const [customKey, setCustomKey] = useState("");
 	const [selectedDeployment, setSelectedDeployment] = useState<{

@@ -1,10 +1,8 @@
 import { Suspense } from "react";
-
-import { CollaboratorsTable } from "./_components/collaborators-table/collaborators-table";
-import { CollaboratorsTableSkeleton } from "./_components/collaborators-table/collaborators-table-loading";
-
 import AddNewCollaborator from "@/web/components/collaborators-page/add-collaborator/codepush";
 import AddNewCollaboratorSkeleton from "@/web/components/collaborators-page/add-collaborator/loading";
+import { CollaboratorsTable } from "./_components/collaborators-table/collaborators-table";
+import { CollaboratorsTableSkeleton } from "./_components/collaborators-table/collaborators-table-loading";
 
 export default async function AppCollaboratorsListPage() {
 	return (

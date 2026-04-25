@@ -16,12 +16,12 @@
  * @module CodePushStorageManager
  */
 
+import { copyObjectToDestination, deleteObjects, getPresignedPostUrl } from "@rentlydev/rnota-aws";
 import { and, asc, desc, eq, inArray, sql } from "drizzle-orm";
 import * as HttpStatusCodes from "stoker/http-status-codes";
-
 import { db } from "../client";
-
-import { copyObjectToDestination, deleteObjects, getPresignedPostUrl } from "@rentlydev/rnota-aws";
+import { InternalStorageError, queryWrapper, StorageError } from "../lib/errors";
+import { STORAGE_ERROR_STRINGS } from "../lib/strings";
 import type {
 	TCodePushApp,
 	TCodePushAppWithPlatformsAndDeployments,
@@ -38,19 +38,16 @@ import type {
 	TUser,
 } from "../schema";
 import {
-	Permission,
-	Platform,
 	codepush_app,
 	codepush_collaborator,
 	codepush_deployment,
 	codepush_platform,
 	codepush_release,
+	Permission,
+	Platform,
 	user,
 } from "../schema";
 import { ADMIN_USER_EMAILS, generateId, lower, slugifyName } from "../schema/_table";
-
-import { InternalStorageError, StorageError, queryWrapper } from "../lib/errors";
-import { STORAGE_ERROR_STRINGS } from "../lib/strings";
 import { MetricsManager } from "./metrics";
 
 /**
@@ -1132,7 +1129,7 @@ export class CodePushStorageManager {
 
 		const latestLabel = latestUnverifiedRelease.label;
 
-		const latestVersion = Number.parseInt(latestLabel.substring(1)); // Trim 'v' from the front
+		const latestVersion = Number.parseInt(latestLabel.substring(1), 10); // Trim 'v' from the front
 		const nextVersion = latestVersion + 1;
 
 		return `v${nextVersion}`;
