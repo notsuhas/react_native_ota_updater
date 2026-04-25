@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { PublicEnvScript } from "next-runtime-env";
 import { Geist, Geist_Mono } from "next/font/google";
 
 import Providers from "@/web/components/providers/providers";
@@ -29,10 +28,6 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en" suppressHydrationWarning>
-			<head>
-				<PublicEnvScript />
-			</head>
-
 			<body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
 				<Providers>{children}</Providers>
 			</body>
