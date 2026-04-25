@@ -39,7 +39,7 @@ async function seed() {
 		console.log("📱 Applications created");
 
 		// Step 3: Platform Configurations
-		await db.insert(schema.codepush_platform).values(seedData.generatePlatforms(apps));
+		const platforms = await db.insert(schema.codepush_platform).values(seedData.generatePlatforms(apps)).returning();
 		console.log("⚙️ Platforms configured");
 
 		// Step 4: Access Control
@@ -53,11 +53,15 @@ async function seed() {
 		// console.log("👥 Collaborators assigned");
 
 		// Step 5: Deployments and Releases
-		const appsWithPlatforms = await db.query.codepush_app.findMany({
-			with: { platforms: true },
-		});
+		// Build the nested shape from rows we just inserted instead of re-querying —
+		// re-querying would pick up leftover apps from prior runs and try to re-insert
+		// deployments for them, violating the (name, platform_id) unique constraint.
+		const appsWithPlatforms = apps.map((app) => ({
+			...app,
+			platforms: platforms.filter((platform) => platform.appId === app.id),
+		}));
 
-		const deployments = await db
+		const _deployments = await db
 			.insert(schema.codepush_deployment)
 			.values(seedData.generateDeployments(appsWithPlatforms))
 			.returning();
