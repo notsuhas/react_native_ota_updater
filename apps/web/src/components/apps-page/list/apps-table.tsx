@@ -11,7 +11,6 @@ import type { TCodePushApp } from "@/web/lib/client/codepush-queries";
 import { ROLES, searchParams } from "@/web/lib/searchParams";
 
 type TCollaboratorApps = TCodePushApp;
-// TODO:: Fix this
 
 interface AppsListTableProps {
 	collaboratorApps: TCollaboratorApps; // Expecting an array now as per the expanded type
@@ -37,7 +36,7 @@ export default function AppsListTable({ collaboratorApps }: AppsListTableProps) 
 				return false;
 			}
 
-			// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+			// biome-ignore lint/suspicious/noExplicitAny: dynamic property key access into inferred union, re-narrowed below
 			const app = (collaboratorApp as any)[inferredAppNameKey];
 			if (!app) return false;
 
@@ -74,7 +73,7 @@ export default function AppsListTable({ collaboratorApps }: AppsListTableProps) 
 
 			<TableBody>
 				{filteredCollaboratorApps.map((collaboratorApp) => {
-					// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+					// biome-ignore lint/suspicious/noExplicitAny: dynamic property key access into inferred union, re-narrowed below
 					const app = (collaboratorApp as any)[inferredAppNameKey] as TCodePushApp[number]["app"];
 
 					if (!app) return null;

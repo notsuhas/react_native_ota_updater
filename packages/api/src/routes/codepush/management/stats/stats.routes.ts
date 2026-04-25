@@ -16,11 +16,12 @@
  *
  * @module routes/codepush/management/stats
  */
-import { createRouter } from "@/api/lib/create/router";
-import { ReleaseStatsResponseSchema } from "@/api/schemas/common";
+
 import { createRoute } from "@hono/zod-openapi";
 import * as HttpStatusCodes from "stoker/http-status-codes";
 import { jsonContent } from "stoker/openapi/helpers";
+import { createRouter } from "@/api/lib/create/router";
+import { ReleaseStatsResponseSchema } from "@/api/schemas/common";
 
 const tags = ["Management/CodePush/Stats"];
 

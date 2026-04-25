@@ -359,9 +359,9 @@ export default class ReleaseReact extends EnsureAuthCommand {
 							`Unable to parse the "${buildGradlePath}" file. Please ensure it is a well-formed Gradle file.`,
 						);
 					})
-					// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+					// biome-ignore lint/suspicious/noExplicitAny: gradle-to-js returns untyped parsed output
 					.then((buildGradle: any) => {
-						let versionName: string | undefined = undefined;
+						let versionName: string | undefined;
 
 						// First 'if' statement was implemented as workaround for case
 						// when 'build.gradle' file contains several 'android' nodes.
@@ -418,7 +418,7 @@ export default class ReleaseReact extends EnsureAuthCommand {
 						];
 
 						// Search for gradle properties across all `gradle.properties` files
-						let propertiesFile: string | undefined = undefined;
+						let propertiesFile: string | undefined;
 						for (let i = 0; i < knownLocations.length; i++) {
 							propertiesFile = knownLocations[i]!;
 							if (fileExists(propertiesFile)) {

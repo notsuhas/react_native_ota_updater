@@ -30,7 +30,7 @@ const CardItem = ({ item }: CardItemProps) => {
 	return (
 		<Link href={url} className="group block" key={url}>
 			<Card className="overflow-hidden transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-primary/25 dark:hover:shadow-primary/50 transform hover:scale-105">
-				<div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-secondary/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+				<div className="absolute inset-0 bg-linear-to-br from-primary/10 to-secondary/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
 				<CardHeader className="relative z-10">
 					<div className="mb-2 flex items-center space-x-2">

@@ -22,9 +22,13 @@ import { Permission, Platform, ReleaseMethod } from "./schema";
 // Export database client and schema
 export * from "./client";
 export * from "./schema";
-
-// Export core functionality
-export { STORAGE_ERROR_STRINGS, StorageManager, DEFAULT_CODEPUSH_DEPLOYMENT_NAMES };
-export { Permission, ReleaseMethod, Platform };
-
 export { ADMIN_USER_EMAILS } from "./schema/_table";
+// Export core functionality
+export {
+	DEFAULT_CODEPUSH_DEPLOYMENT_NAMES,
+	Permission,
+	Platform,
+	ReleaseMethod,
+	STORAGE_ERROR_STRINGS,
+	StorageManager,
+};

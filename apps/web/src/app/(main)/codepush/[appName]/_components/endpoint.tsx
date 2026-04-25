@@ -1,17 +1,16 @@
 "use client";
 
-import { Button } from "@/web/components/ui/button";
-import { Input } from "@/web/components/ui/input";
 import { Copy } from "lucide-react";
-import { env } from "next-runtime-env";
 import { useState } from "react";
 import { toast } from "sonner";
+import { Button } from "@/web/components/ui/button";
+import { Input } from "@/web/components/ui/input";
 
 export function Endpoint() {
 	const [isCopied, setIsCopied] = useState(false);
 
 	const endpoint = "api/codepush/acquisition/";
-	const endpointUrl = `${env("NEXT_PUBLIC_API_URL")}${endpoint}`;
+	const endpointUrl = `${process.env.NEXT_PUBLIC_API_URL ?? ""}${endpoint}`;
 
 	const copyToClipboard = async () => {
 		try {

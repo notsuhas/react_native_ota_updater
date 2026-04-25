@@ -4,7 +4,7 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/web/components/ui/avatar";
 import { Combobox } from "@/web/components/ui/combobox";
-import { type TUsers, getAllUsersQueryOptions } from "@/web/lib/client/common-queries";
+import { getAllUsersQueryOptions, type TUsers } from "@/web/lib/client/common-queries";
 
 interface UserSelectorProps {
 	value?: string;

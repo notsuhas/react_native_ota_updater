@@ -18,15 +18,13 @@
  * @module routes/common/user
  */
 
-import { createRouter } from "@/api/lib/create/router";
 import { createRoute, z } from "@hono/zod-openapi";
+import { selectUserSchema } from "@rentlydev/rnota-db";
 import * as HttpStatusCodes from "stoker/http-status-codes";
 import { jsonContent } from "stoker/openapi/helpers";
 import { createErrorSchema, createMessageObjectSchema } from "stoker/openapi/schemas";
-
-import { selectUserSchema } from "@rentlydev/rnota-db";
-
 import { DEFAULT_ACCESS_KEY_EXPIRY } from "@/api/lib/constants";
+import { createRouter } from "@/api/lib/create/router";
 import { DEFAULT_AUTH_RESPONSES } from "@/api/lib/openapi/open-api-responses";
 import { getIpAddress } from "@/api/utils/common-headers";
 import { STRINGS } from "@/api/utils/strings";
@@ -86,7 +84,7 @@ const GetUserRoute = createRoute({
 		...DEFAULT_AUTH_RESPONSES,
 		[HttpStatusCodes.OK]: jsonContent(
 			z.object({
-				user: selectUserSchema.omit({ emailVerified: true }).openapi({ description: "The user information" }),
+				user: selectUserSchema.omit({ emailVerified: true }).meta({ description: "The user information" }),
 			}),
 			"Returns the user information",
 		),
@@ -118,9 +116,7 @@ const GetAllUsersRoute = createRoute({
 		...DEFAULT_AUTH_RESPONSES,
 		[HttpStatusCodes.OK]: jsonContent(
 			z.object({
-				users: z
-					.array(selectUserSchema.omit({ emailVerified: true }))
-					.openapi({ description: "The users information" }),
+				users: z.array(selectUserSchema.omit({ emailVerified: true })).meta({ description: "The users information" }),
 			}),
 			"Returns the users information",
 		),
@@ -144,7 +140,7 @@ const HostNameQuerySchema = z.object({
 		.string()
 		.min(1)
 		.max(100)
-		.openapi({
+		.meta({
 			description: "The hostname for which the access key login is being created.",
 			example: "MacBook-Pro.local",
 			param: {
@@ -186,7 +182,7 @@ const GetAccessKeyLoginRoute = createRoute({
 		),
 		[HttpStatusCodes.OK]: jsonContent(
 			z.object({
-				token: z.string().min(1).max(100).openapi({ description: "The newly created access key token" }),
+				token: z.string().min(1).max(100).meta({ description: "The newly created access key token" }),
 			}),
 			"Returns the newly created access key token",
 		),

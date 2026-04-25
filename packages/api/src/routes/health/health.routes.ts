@@ -17,11 +17,11 @@
  * @module routes/health
  */
 
-import { createRouter } from "@/api/lib/create/router";
 import { createRoute, z } from "@hono/zod-openapi";
 import * as HttpStatusCodes from "stoker/http-status-codes";
 import { jsonContent } from "stoker/openapi/helpers";
 import { createMessageObjectSchema } from "stoker/openapi/schemas";
+import { createRouter } from "@/api/lib/create/router";
 
 import { INTERNAL_SERVER_ERROR_RESPONSE } from "@/api/lib/openapi/open-api-responses";
 import { STRINGS } from "@/api/utils/strings";

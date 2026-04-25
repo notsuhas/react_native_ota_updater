@@ -27,16 +27,19 @@
  * @module routes/codepush/management/release
  */
 
-import * as semver from "semver";
-
-import { createRouter } from "@/api/lib/create/router";
 import { createRoute, z } from "@hono/zod-openapi";
+import { getDownloadUrlByKey } from "@rentlydev/rnota-aws";
+import {
+	DEFAULT_CODEPUSH_DEPLOYMENT_NAMES,
+	Permission,
+	ReleaseMethod,
+	type TCodePushRelease,
+} from "@rentlydev/rnota-db";
+import * as semver from "semver";
 import * as HttpStatusCodes from "stoker/http-status-codes";
 import { jsonContent, jsonContentOneOf, jsonContentRequired } from "stoker/openapi/helpers";
 import { createErrorSchema, createMessageObjectSchema } from "stoker/openapi/schemas";
-
-import { Permission, ReleaseMethod, type TCodePushRelease } from "@rentlydev/rnota-db";
-
+import { createRouter } from "@/api/lib/create/router";
 import { createMessageSchema, textContent } from "@/api/lib/openapi/schemas";
 import {
 	AppNamePlatformDeploymentQuerySchema,
@@ -52,9 +55,6 @@ import {
 } from "@/api/schemas/common";
 import { isUnfinishedRollout } from "@/api/utils/codepush/rollout-selector";
 import { STRINGS } from "@/api/utils/strings";
-
-import { getDownloadUrlByKey } from "@rentlydev/rnota-aws";
-import { DEFAULT_CODEPUSH_DEPLOYMENT_NAMES } from "@rentlydev/rnota-db";
 import { APP_NOT_FOUND_RESPONSE, PERMISSION_ERROR_RESPONSE } from "../app/app.routes";
 import { invalidateCachedPackage } from "../history/history.routes";
 
@@ -165,7 +165,7 @@ const PostReleaseVerifiedRoute = createRoute({
 	request: {
 		query: AppNamePlatformDeploymentQuerySchema,
 		body: jsonContentRequired(
-			z.object({ releaseId: z.number().openapi({ description: "The release id" }) }),
+			z.object({ releaseId: z.number().meta({ description: "The release id" }) }),
 			"The release id to verify",
 		),
 	},
@@ -175,7 +175,7 @@ const PostReleaseVerifiedRoute = createRoute({
 		[HttpStatusCodes.UNPROCESSABLE_ENTITY]: jsonContentOneOf(
 			[
 				createErrorSchema(AppNamePlatformDeploymentQuerySchema),
-				createErrorSchema(z.object({ releaseId: z.number().openapi({ description: "The release id" }) })),
+				createErrorSchema(z.object({ releaseId: z.number().meta({ description: "The release id" }) })),
 			],
 			"Returns an error if the query parameters or payload are missing or invalid",
 		),

@@ -18,13 +18,12 @@
  * @module routes/codepush/management/collaborator
  */
 
-import { createRouter } from "@/api/lib/create/router";
 import { createRoute, z } from "@hono/zod-openapi";
+import { Permission, selectCodePushCollaboratorWithUserSchema } from "@rentlydev/rnota-db";
 import * as HttpStatusCodes from "stoker/http-status-codes";
 import { jsonContent, jsonContentRequired } from "stoker/openapi/helpers";
 import { createErrorSchema, createMessageObjectSchema } from "stoker/openapi/schemas";
-
-import { Permission, selectCodePushCollaboratorWithUserSchema } from "@rentlydev/rnota-db";
+import { createRouter } from "@/api/lib/create/router";
 
 import { AppNameEmailBodySchema, AppNameEmailPermissionBodySchema, AppNameQuerySchema } from "@/api/schemas/common";
 import { STRINGS } from "@/api/utils/strings";
@@ -64,7 +63,7 @@ const GetCollaboratorsForApp = createRoute({
 			z.object({
 				collaborators: z
 					.array(selectCodePushCollaboratorWithUserSchema)
-					.openapi({ description: "The list of collaborators for the app" }),
+					.meta({ description: "The list of collaborators for the app" }),
 			}),
 			"Returns the list of collaborators for the app",
 		),

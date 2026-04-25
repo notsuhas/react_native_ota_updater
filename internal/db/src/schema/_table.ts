@@ -3,11 +3,10 @@
  * This module provides common schema patterns and utility functions for database tables
  */
 
-import { nanoid } from "nanoid";
-import slugify from "slugify";
-
 import { type AnyColumn, type SQL, sql } from "drizzle-orm";
 import { type AnyPgColumn, type ReferenceConfig, text, timestamp } from "drizzle-orm/pg-core";
+import { nanoid } from "nanoid";
+import slugify from "slugify";
 
 // Constants
 export const DEFAULT_APP_ICON_URL = "https://cdn4.iconfinder.com/data/icons/logos-3/600/React.js_logo-512.png";

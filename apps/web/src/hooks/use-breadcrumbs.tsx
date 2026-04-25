@@ -38,7 +38,7 @@ export function useBreadcrumbs() {
 			},
 		];
 
-		segments.map((segment, index) => {
+		segments.forEach((segment, index) => {
 			const path = `/${segments.slice(0, index + 1).join("/")}`;
 
 			breadcrumbs.push({

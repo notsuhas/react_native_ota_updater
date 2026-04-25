@@ -18,12 +18,10 @@ import { input, select } from "@inquirer/prompts";
 import { Flags } from "@oclif/core";
 import { Listr } from "listr2";
 import opener from "opener";
-
-import { BaseCommand } from "./base-command.js";
-
-import { SERVER_URLS, SERVER_URL_CHOICES } from "../config/constants.js";
+import { SERVER_URL_CHOICES, SERVER_URLS } from "../config/constants.js";
 import { credentialsVault } from "../services/credentials-vault.js";
 import { sdk } from "../services/management-sdk.js";
+import { BaseCommand } from "./base-command.js";
 
 /**
  * Base class for authentication commands

@@ -15,7 +15,7 @@ import {
 	CommandList,
 } from "@/web/components/ui/command";
 import { Popover, PopoverContent, PopoverTrigger } from "@/web/components/ui/popover";
-import { type TUsers, getAllUsersQueryOptions } from "@/web/lib/client/common-queries";
+import { getAllUsersQueryOptions, type TUsers } from "@/web/lib/client/common-queries";
 import { cn } from "@/web/lib/utils";
 
 interface MultiUserSelectorProps {
@@ -85,7 +85,7 @@ export function MultiUserSelector({
 										{user.name || user.email}
 										<button
 											type="button"
-											className="ml-1 rounded-full outline-none ring-offset-background focus:ring-2 focus:ring-ring focus:ring-offset-2"
+											className="ml-1 rounded-full outline-hidden ring-offset-background focus:ring-2 focus:ring-ring focus:ring-offset-2"
 											onClick={(e) => {
 												e.stopPropagation();
 												if (!disabled) handleRemove(user.email);

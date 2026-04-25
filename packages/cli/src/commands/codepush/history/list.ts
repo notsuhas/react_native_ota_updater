@@ -7,9 +7,8 @@
  */
 
 import { Args, Flags } from "@oclif/core";
-import { Listr } from "listr2";
-
 import CliTable3 from "cli-table3";
+import { Listr } from "listr2";
 import { EnsureAuthCommand } from "../../../common/ensure-auth-command.js";
 import { formatRelativeDateFromNow } from "../../../lib/duration.js";
 import { type Platform, type ReleaseHistory, ReleaseMethod } from "../../../services/codepush-sdk.js";
@@ -82,7 +81,7 @@ export default class DeploymentHistoryList extends EnsureAuthCommand {
 				? `\n${this.chalk.green("Rollout:")} ${packageObject.rollout.toLocaleString()}%`
 				: "";
 
-		if (!packageObject || !packageObject.metrics) {
+		if (!packageObject?.metrics) {
 			return this.chalk.magenta("No installs recorded").toString() + (rolloutString || "");
 		}
 
@@ -101,7 +100,6 @@ export default class DeploymentHistoryList extends EnsureAuthCommand {
 
 		const numPending: number = downloadedCount - installedCount - failedCount;
 
-		// @ts-ignore
 		let returnString = `${this.chalk.green("Active: ") + percentString} (${activeCount.toLocaleString()} of ${totalActive.toLocaleString()})\n${this.chalk.green("Total: ")}${installedCount.toLocaleString()}`;
 
 		if (numPending > 0) {
@@ -175,7 +173,7 @@ export default class DeploymentHistoryList extends EnsureAuthCommand {
 					if (release.releaseMethod === ReleaseMethod.PROMOTE) {
 						releaseSource = `Promoted ${release.originalLabel} from "${release.originalDeploymentName}"`;
 					} else if (release.releaseMethod === ReleaseMethod.ROLLBACK) {
-						const labelNumber: number = Number.parseInt(release.label.substring(1));
+						const labelNumber: number = Number.parseInt(release.label.substring(1), 10);
 						const lastLabel: string = `v${labelNumber - 1}`;
 						releaseSource = `Rolled back ${lastLabel} to ${release.originalLabel}`;
 					}

@@ -1,5 +1,9 @@
 "use client";
 
+import { Home, Info } from "lucide-react";
+import Link from "next/link";
+import { usePathname, useSearchParams } from "next/navigation";
+import { BRANDING } from "@/web/branding";
 import { Icons } from "@/web/components/ui/icons";
 import {
 	Sidebar,
@@ -13,12 +17,6 @@ import {
 	SidebarRail,
 } from "@/web/components/ui/sidebar";
 import { PAGES } from "@/web/lib/constants";
-
-import { Home, Info } from "lucide-react";
-import Link from "next/link";
-import { usePathname, useSearchParams } from "next/navigation";
-
-import { BRANDING } from "@/web/branding";
 
 import pkgJson from "../../package.json";
 

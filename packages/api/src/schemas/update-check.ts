@@ -56,7 +56,7 @@ import { LabelSchema } from "./common";
  */
 export const UpdateCheckRequestQuerySchema = z
 	.object({
-		deployment_key: z.string().openapi({
+		deployment_key: z.string().meta({
 			description: "The deployment key used to authenticate and identify the deployment environment",
 			param: {
 				in: "query",
@@ -65,7 +65,7 @@ export const UpdateCheckRequestQuerySchema = z
 			},
 		}),
 
-		app_version: z.string().openapi({
+		app_version: z.string().meta({
 			description: "The current version of the application requesting an update check",
 			param: {
 				in: "query",
@@ -74,7 +74,7 @@ export const UpdateCheckRequestQuerySchema = z
 			},
 		}),
 
-		client_unique_id: z.string().openapi({
+		client_unique_id: z.string().meta({
 			description: "A unique identifier for the client device making the update check request",
 			param: {
 				in: "query",
@@ -86,7 +86,7 @@ export const UpdateCheckRequestQuerySchema = z
 		is_companion: z.coerce
 			.boolean()
 			.nullish()
-			.openapi({
+			.meta({
 				description: "Boolean flag indicating whether the request is a companion app",
 				param: {
 					in: "query",
@@ -96,7 +96,7 @@ export const UpdateCheckRequestQuerySchema = z
 
 		label: LabelSchema.nullish()
 			.default(null)
-			.openapi({
+			.meta({
 				description: "The version label of the currently installed package (format: v1, v2, etc.)",
 				param: {
 					in: "query",
@@ -107,7 +107,7 @@ export const UpdateCheckRequestQuerySchema = z
 		package_hash: z
 			.string()
 			.nullish()
-			.openapi({
+			.meta({
 				description: "The cryptographic hash of the currently installed package for version comparison",
 				param: {
 					in: "query",
@@ -115,7 +115,7 @@ export const UpdateCheckRequestQuerySchema = z
 				},
 			}),
 	})
-	.openapi({ description: "Query parameters used to check for available updates for a specific deployment" });
+	.meta({ description: "Query parameters used to check for available updates for a specific deployment" });
 
 /**
  * Type definition for update check request query parameters

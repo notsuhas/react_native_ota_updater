@@ -1,21 +1,23 @@
 "use client";
 
-import { Button } from "@/web/components/ui/button";
-import { Input } from "@/web/components/ui/input";
-import { getPlatformDeploymentsQueryOptions } from "@/web/lib/client/codepush-queries";
-import { searchParams } from "@/web/lib/searchParams";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { Copy } from "lucide-react";
 import { useQueryStates } from "nuqs";
 import { useState } from "react";
 import { toast } from "sonner";
+import { Button } from "@/web/components/ui/button";
+import { Input } from "@/web/components/ui/input";
+import { useRequiredCodePushPlatformRoute } from "@/web/hooks/use-codepush-route";
+import { getPlatformDeploymentsQueryOptions } from "@/web/lib/client/codepush-queries";
+import { searchParams } from "@/web/lib/searchParams";
 
 export function DeploymentKey() {
 	const [isCopied, setIsCopied] = useState(false);
 
 	const [{ deployment }] = useQueryStates(searchParams);
+	const { appName, platformName: platform } = useRequiredCodePushPlatformRoute();
 
-	const { data: platformDeployments } = useSuspenseQuery(getPlatformDeploymentsQueryOptions());
+	const { data: platformDeployments } = useSuspenseQuery(getPlatformDeploymentsQueryOptions({ appName, platform }));
 
 	const deploymentKey =
 		platformDeployments?.find((platformDeployment) => platformDeployment.name === deployment)?.key ?? "";

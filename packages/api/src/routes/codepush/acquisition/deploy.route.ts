@@ -14,13 +14,12 @@
  * @module CodePushDeploymentStatus
  */
 
-import { createRouter } from "@/api/lib/create/router";
 import { createRoute, z } from "@hono/zod-openapi";
+import { DEPLOYMENT_STATUS } from "@rentlydev/rnota-redis";
 import * as HttpStatusCodes from "stoker/http-status-codes";
 import { jsonContent, jsonContentRequired } from "stoker/openapi/helpers";
 import { createErrorSchema } from "stoker/openapi/schemas";
-
-import { DEPLOYMENT_STATUS } from "@rentlydev/rnota-redis";
+import { createRouter } from "@/api/lib/create/router";
 
 import { INTERNAL_SERVER_ERROR_RESPONSE } from "@/api/lib/openapi/open-api-responses";
 import { createMessageSchema, textContent } from "@/api/lib/openapi/schemas";
@@ -44,40 +43,40 @@ import { STRINGS } from "@/api/utils/strings";
  */
 const ReportStatusDeployRequestBodySchema = z
 	.object({
-		app_version: z.string().openapi({
+		app_version: z.string().meta({
 			description: "The current version of the application after deployment attempt",
 		}),
-		deployment_key: z.string().openapi({
+		deployment_key: z.string().meta({
 			description: "The deployment key identifying the target deployment",
 		}),
-		client_unique_id: z.string().openapi({
+		client_unique_id: z.string().meta({
 			description: "Unique identifier for the client device",
 		}),
-		status: z.enum([DEPLOYMENT_STATUS.DEPLOYMENT_FAILED, DEPLOYMENT_STATUS.DEPLOYMENT_SUCCEEDED]).openapi({
+		status: z.enum([DEPLOYMENT_STATUS.DEPLOYMENT_FAILED, DEPLOYMENT_STATUS.DEPLOYMENT_SUCCEEDED]).meta({
 			description: "The final status of the deployment attempt (success/failure)",
 		}),
-		label: LabelSchema.openapi({
+		label: LabelSchema.meta({
 			description: "The version label of the package that was deployed",
 		}),
-		previous_deployment_key: z.string().nullish().openapi({
+		previous_deployment_key: z.string().nullish().meta({
 			description: "The deployment key of the previous version (defaults to current deployment key if not provided)",
 		}),
 		previous_label_or_app_version: z
 			.string()
-			.openapi({
+			.meta({
 				description: "The previous version of the application",
 			})
 			.or(
-				LabelSchema.openapi({
+				LabelSchema.meta({
 					description: "The version label of the previous package",
 				}),
 			)
 			.optional()
-			.openapi({
+			.meta({
 				description: "The previous version identifier (either app version or package label)",
 			}),
 	})
-	.openapi({
+	.meta({
 		description: "Request body for reporting the status of a CodePush deployment attempt",
 	});
 

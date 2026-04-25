@@ -17,7 +17,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { CLIError } from "@oclif/core/errors";
 import chalk from "chalk";
-// @ts-ignore
+// @ts-expect-error
 import g2js from "gradle-to-js";
 import { coerce, compare } from "semver";
 import { fileDoesNotExistOrIsDirectory } from "./file-system.js";
@@ -82,7 +82,7 @@ export async function runHermesEmitBinaryCommand(
 			console.log(data.toString().trim());
 		});
 
-		hermesProcess.stderr.on("data", (data: Buffer) => {
+		hermesProcess.stderr.on("data", (_data: Buffer) => {
 			// console.error(data.toString().trim());
 		});
 
@@ -410,7 +410,7 @@ export function directoryExistsSync(dirname: string): boolean {
 	try {
 		return fs.statSync(dirname).isDirectory();
 	} catch (err) {
-		// @ts-ignore
+		// @ts-expect-error
 		if (err.code !== "ENOENT") {
 			throw err;
 		}
@@ -443,7 +443,7 @@ export function getReactNativeVersion(): string {
 		);
 	}
 
-	// @ts-ignore
+	// @ts-expect-error
 	const projectName: string = projectPackageJson?.name;
 
 	if (!projectName) {
@@ -451,9 +451,9 @@ export function getReactNativeVersion(): string {
 	}
 
 	return (
-		// @ts-ignore
+		// @ts-expect-error
 		projectPackageJson.dependencies?.["react-native"] ||
-		// @ts-ignore
+		// @ts-expect-error
 		projectPackageJson.devDependencies?.["react-native"]
 	);
 }

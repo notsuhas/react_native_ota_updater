@@ -5,11 +5,10 @@
  */
 
 import { serve } from "@hono/node-server";
-
+import { showRoutes } from "hono/dev";
 import app from "@/api/app";
 import env from "@/api/env";
 import { BASE_API_PATH } from "@/api/lib/constants";
-import { showRoutes } from "hono/dev";
 
 /**
  * Start the HTTP server with the configured Hono application

@@ -14,13 +14,12 @@
  * @module CodePushDownloadStatus
  */
 
-import { createRouter } from "@/api/lib/create/router";
 import { createRoute, z } from "@hono/zod-openapi";
+import { DEPLOYMENT_STATUS } from "@rentlydev/rnota-redis";
 import * as HttpStatusCodes from "stoker/http-status-codes";
 import { jsonContent, jsonContentRequired } from "stoker/openapi/helpers";
 import { createErrorSchema } from "stoker/openapi/schemas";
-
-import { DEPLOYMENT_STATUS } from "@rentlydev/rnota-redis";
+import { createRouter } from "@/api/lib/create/router";
 
 import { INTERNAL_SERVER_ERROR_RESPONSE } from "@/api/lib/openapi/open-api-responses";
 import { createMessageSchema, textContent } from "@/api/lib/openapi/schemas";
@@ -41,17 +40,17 @@ import { STRINGS } from "@/api/utils/strings";
  */
 const ReportStatusDownloadRequestBodySchema = z
 	.object({
-		deployment_key: z.string().openapi({
+		deployment_key: z.string().meta({
 			description: "The deployment key identifying the source deployment",
 		}),
-		label: LabelSchema.openapi({
+		label: LabelSchema.meta({
 			description: "The version label of the package that was downloaded",
 		}),
-		client_unique_id: z.string().openapi({
+		client_unique_id: z.string().meta({
 			description: "Unique identifier for the client device that performed the download",
 		}),
 	})
-	.openapi({
+	.meta({
 		description: "Request body for reporting a successful package download from CodePush",
 	});
 

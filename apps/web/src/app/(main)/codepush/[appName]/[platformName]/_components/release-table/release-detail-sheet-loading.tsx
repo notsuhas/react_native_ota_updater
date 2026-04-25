@@ -32,7 +32,7 @@ export function ReleaseDetailsSkeleton() {
 			</div>
 			<div className="grid grid-cols-2 gap-x-8 gap-y-4">
 				{Array.from({ length: 8 }).map((_, index) => (
-					// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+					// biome-ignore lint/suspicious/noArrayIndexKey: static skeleton placeholder, no reorder possible
 					<div key={index}>
 						<Skeleton className="h-4 w-24 mb-2" />
 						<Skeleton className="h-6 w-32" />

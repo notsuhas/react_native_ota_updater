@@ -2,6 +2,7 @@
 
 import { useSuspenseQuery } from "@tanstack/react-query";
 
+import { useRequiredCodePushAppName } from "@/web/hooks/use-codepush-route";
 import { getCollaboratorsQueryOptions, useBulkAddCollaboratorMutation } from "@/web/lib/client/codepush-queries";
 
 import AddCollaboratorDialog, { type AddCollaboratorFormValue, type PERMISSIONS } from "./add-collaborator-dialog";
@@ -12,8 +13,10 @@ interface CodePushMutationData {
 }
 
 export default function AddNewCollaborator() {
+	const appName = useRequiredCodePushAppName();
+	// biome-ignore lint/correctness/useHookAtTopLevel: hook factory passed as a prop to AddCollaboratorDialog which calls it at its top level
 	const mutation = (onSuccess: () => void) => useBulkAddCollaboratorMutation(onSuccess);
-	const { data: codepushCollaborators } = useSuspenseQuery(getCollaboratorsQueryOptions());
+	const { data: codepushCollaborators } = useSuspenseQuery(getCollaboratorsQueryOptions({ appName }));
 
 	const onSubmitDataTransform = (data: AddCollaboratorFormValue): CodePushMutationData => ({
 		emails: data["collaborator-emails"],
