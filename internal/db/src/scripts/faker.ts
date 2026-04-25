@@ -91,8 +91,8 @@ export function generateFakeUsers(): TInsertUser[] {
 
 			return {
 				...user,
-				createdAt,
-				updatedAt,
+				createdAt: new Date(createdAt),
+				updatedAt: new Date(updatedAt),
 			};
 		});
 	}
@@ -106,10 +106,10 @@ export function generateFakeUsers(): TInsertUser[] {
 			name: faker.person.fullName(),
 			email: faker.internet.email(),
 			image: faker.image.avatar(),
-			emailVerified: faker.datatype.boolean() ? new Date(randomRecentPastDate()) : null,
+			emailVerified: faker.datatype.boolean(),
 
-			createdAt,
-			updatedAt,
+			createdAt: new Date(createdAt),
+			updatedAt: new Date(updatedAt),
 		};
 	});
 }
@@ -127,18 +127,17 @@ export function generateFakeAccounts(users: TUser[]): TInsertAccount[] {
 			createdAt: user.createdAt,
 			updatedAt: user.updatedAt,
 
-			type: "oauth",
-			provider: "github",
-			providerAccountId: faker.number.int({ min: 1000000, max: 9999999 }).toString(),
+			providerId: "github",
+			accountId: faker.number.int({ min: 1000000, max: 9999999 }).toString(),
 
-			token_type: "Bearer",
 			scope: "read:user,user:email",
-			expires_at: null,
+			accessTokenExpiresAt: null,
+			refreshTokenExpiresAt: null,
 
-			refresh_token: faker.datatype.boolean() ? faker.string.alphanumeric(64) : null,
-			access_token: faker.datatype.boolean() ? faker.string.alphanumeric(64) : null,
-			id_token: faker.datatype.boolean() ? faker.string.alphanumeric(128) : null,
-			session_state: faker.datatype.boolean() ? faker.string.alphanumeric(32) : null,
+			refreshToken: faker.datatype.boolean() ? faker.string.alphanumeric(64) : null,
+			accessToken: faker.datatype.boolean() ? faker.string.alphanumeric(64) : null,
+			idToken: faker.datatype.boolean() ? faker.string.alphanumeric(128) : null,
+			password: null,
 		};
 	});
 }
