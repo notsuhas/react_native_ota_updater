@@ -2,13 +2,16 @@ import { queryOptions, useMutation } from "@tanstack/react-query";
 import type { InferRequestType, InferResponseType } from "hono/client";
 import { useQueryStates } from "nuqs";
 import { toast } from "sonner";
-
+import {
+	type PlatformName,
+	useRequiredCodePushAppName,
+	useRequiredCodePushPlatformRoute,
+} from "@/web/hooks/use-codepush-route";
 import apiClient from "@/web/lib/client/api-client";
 import { handleApiError } from "@/web/lib/common/error";
 import { getQueryClient } from "@/web/lib/query-client";
 import { queryKeys } from "@/web/lib/query-keys";
 import { searchParams } from "@/web/lib/searchParams";
-import { type PlatformName, useAppName, usePlatformName } from "@/web/store/store";
 
 type TOnSuccessCallback = () => void;
 
@@ -31,9 +34,7 @@ export const getAllCollaboratorAppsQueryOptions = () => {
 	});
 };
 
-export const getAppQueryOptions = () => {
-	const appName = useAppName();
-
+export const getAppQueryOptions = ({ appName }: { appName: string }) => {
 	return queryOptions({
 		queryKey: queryKeys.codepush.overview({ appName }),
 		queryFn: async () => {
@@ -49,9 +50,7 @@ export const getAppQueryOptions = () => {
 	});
 };
 
-export const getCollaboratorsQueryOptions = () => {
-	const appName = useAppName();
-
+export const getCollaboratorsQueryOptions = ({ appName }: { appName: string }) => {
 	return queryOptions({
 		queryKey: queryKeys.codepush.collaborators({ appName }),
 		queryFn: async () => {
@@ -67,10 +66,13 @@ export const getCollaboratorsQueryOptions = () => {
 	});
 };
 
-export const getPlatformDeploymentsQueryOptions = () => {
-	const appName = useAppName();
-	const platform = usePlatformName();
-
+export const getPlatformDeploymentsQueryOptions = ({
+	appName,
+	platform,
+}: {
+	appName: string;
+	platform: PlatformName;
+}) => {
 	return queryOptions({
 		queryKey: queryKeys.codepush.deployments({ appName }),
 		queryFn: async () => {
@@ -94,11 +96,15 @@ export type TReleaseHistory = InferResponseType<
 	200
 >["history"][number];
 
-export const getPlatformDeploymentHistoryQueryOptions = () => {
-	const appName = useAppName();
-	const platform = usePlatformName();
-	const [{ deployment: deploymentName }] = useQueryStates(searchParams);
-
+export const getPlatformDeploymentHistoryQueryOptions = ({
+	appName,
+	platform,
+	deploymentName,
+}: {
+	appName: string;
+	platform: PlatformName;
+	deploymentName: string;
+}) => {
 	return queryOptions({
 		queryKey: queryKeys.codepush.history({ appName, platform, deploymentName }),
 		queryFn: async () => {
@@ -116,11 +122,17 @@ export const getPlatformDeploymentHistoryQueryOptions = () => {
 	});
 };
 
-export const getReleaseDetailsQueryOptions = () => {
-	const appName = useAppName();
-	const platform = usePlatformName();
-	const [{ deployment: deploymentName, label }] = useQueryStates(searchParams);
-
+export const getReleaseDetailsQueryOptions = ({
+	appName,
+	platform,
+	deploymentName,
+	label,
+}: {
+	appName: string;
+	platform: PlatformName;
+	deploymentName: string;
+	label: string;
+}) => {
 	const refetchInterval = deploymentName === "Production" ? 30000 : undefined;
 
 	return queryOptions({
@@ -164,8 +176,7 @@ export type UpdateReleaseFields = InferRequestType<
 >["json"]["packageInfo"];
 
 export const useUpdateReleaseMutation = (onSuccessCallback: TOnSuccessCallback) => {
-	const appName = useAppName();
-	const platform = usePlatformName();
+	const { appName, platformName: platform } = useRequiredCodePushPlatformRoute();
 	const [{ deployment, label }] = useQueryStates(searchParams);
 
 	return useMutation({
@@ -193,7 +204,7 @@ export const useUpdateReleaseMutation = (onSuccessCallback: TOnSuccessCallback) 
 			return data.message ?? data;
 		},
 		onSuccess: (data) => {
-			if (Number.parseInt(data) === 304) {
+			if (Number.parseInt(data, 10) === 304) {
 				onSuccessCallback();
 				toast.info("Not Modified");
 				return;
@@ -242,7 +253,7 @@ export type AddCollaboratorFormValue = Omit<
 >;
 
 export const useAddCollaboratorMutation = (onSuccessCallback: TOnSuccessCallback) => {
-	const appName = useAppName();
+	const appName = useRequiredCodePushAppName();
 
 	return useMutation({
 		mutationFn: async (formData: AddCollaboratorFormValue) => {
@@ -274,7 +285,7 @@ export type BulkAddCollaboratorFormValue = Omit<
 };
 
 export const useBulkAddCollaboratorMutation = (onSuccessCallback: TOnSuccessCallback) => {
-	const appName = useAppName();
+	const appName = useRequiredCodePushAppName();
 
 	return useMutation({
 		mutationFn: async (formData: BulkAddCollaboratorFormValue) => {
@@ -317,7 +328,7 @@ export type UpdateCollaboratorPermissionFormValue = Omit<
 >;
 
 export const useUpdateCollaboratorPermissionMutation = (onSuccessCallback: TOnSuccessCallback) => {
-	const appName = useAppName();
+	const appName = useRequiredCodePushAppName();
 
 	return useMutation({
 		mutationFn: async (formData: UpdateCollaboratorPermissionFormValue) => {
@@ -342,7 +353,7 @@ export const useUpdateCollaboratorPermissionMutation = (onSuccessCallback: TOnSu
 };
 
 export const useDeleteCollaboratorMutation = (onSuccessCallback: TOnSuccessCallback) => {
-	const appName = useAppName();
+	const appName = useRequiredCodePushAppName();
 
 	return useMutation({
 		mutationFn: async (email: string) => {
@@ -372,7 +383,7 @@ export type AddDeploymentFormValue = Omit<
 >;
 
 export const useAddDeploymentMutation = (onSuccessCallback: TOnSuccessCallback) => {
-	const appName = useAppName();
+	const appName = useRequiredCodePushAppName();
 
 	return useMutation({
 		mutationFn: async (formData: AddDeploymentFormValue) => {
@@ -396,8 +407,7 @@ export const useAddDeploymentMutation = (onSuccessCallback: TOnSuccessCallback) 
 };
 
 export const usePromoteReleaseMutation = (onSuccessCallback: TOnSuccessCallback) => {
-	const appName = useAppName();
-	const platform = usePlatformName();
+	const { appName, platformName: platform } = useRequiredCodePushPlatformRoute();
 	const [{ deployment, label }] = useQueryStates(searchParams);
 
 	return useMutation({
@@ -432,8 +442,7 @@ export const usePromoteReleaseMutation = (onSuccessCallback: TOnSuccessCallback)
 };
 
 export const useDeleteReleaseMutation = (onSuccessCallback: TOnSuccessCallback) => {
-	const appName = useAppName();
-	const platform = usePlatformName();
+	const { appName, platformName: platform } = useRequiredCodePushPlatformRoute();
 	const [{ deployment, label }] = useQueryStates(searchParams);
 
 	return useMutation({
@@ -461,8 +470,7 @@ export const useDeleteReleaseMutation = (onSuccessCallback: TOnSuccessCallback) 
 };
 
 export const useRollbackReleaseMutation = (onSuccessCallback: TOnSuccessCallback) => {
-	const appName = useAppName();
-	const platform = usePlatformName();
+	const { appName, platformName: platform } = useRequiredCodePushPlatformRoute();
 	const [{ deployment, label }] = useQueryStates(searchParams);
 
 	return useMutation({

@@ -14,22 +14,20 @@
  * @module DatabaseSchema
  */
 
-// Authentication and User Management
-export * from "./access-key";
-export * from "./session";
-export * from "./account";
-export * from "./user";
-
-// Common Types and Utilities
-export * from "./common";
-
 // CodePush Schema
 export * from "./(codepush)/app";
 export * from "./(codepush)/collaborator";
 export * from "./(codepush)/deployment";
+export * from "./(codepush)/metrics";
 export * from "./(codepush)/platform";
 export * from "./(codepush)/release";
-export * from "./(codepush)/metrics";
-
+// Authentication and User Management
+export * from "./access-key";
+export * from "./account";
+// Common Types and Utilities
+export * from "./common";
+export * from "./session";
+export * from "./user";
 // Schema Validation
 export * from "./validations";
+export * from "./verification";
