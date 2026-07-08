@@ -22,7 +22,7 @@ export default function UsersTableLoading() {
 
 					<TableBody>
 						{Array.from({ length: 5 }).map((_, i) => (
-							// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+							// biome-ignore lint/suspicious/noArrayIndexKey: static skeleton placeholder, no reorder possible
 							<TableRow key={i}>
 								<TableCell className="font-medium">
 									<div className="flex items-center space-x-2">

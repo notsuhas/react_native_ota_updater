@@ -1,12 +1,12 @@
 "use client";
 
+import { format } from "date-fns";
+import { useQueryStates } from "nuqs";
 import { Avatar, AvatarFallback, AvatarImage } from "@/web/components/ui/avatar";
 import { Badge } from "@/web/components/ui/badge";
 import { TableCell, TableRow } from "@/web/components/ui/table";
 import type { TReleaseHistory } from "@/web/lib/client/codepush-queries";
 import { searchParams } from "@/web/lib/searchParams";
-import { format } from "date-fns";
-import { useQueryStates } from "nuqs";
 
 type ReleaseRowProps = {
 	release: TReleaseHistory;

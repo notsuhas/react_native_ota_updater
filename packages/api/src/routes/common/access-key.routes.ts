@@ -19,16 +19,14 @@
  * @module AccessKeyRoutes
  */
 
-import { createRouter } from "@/api/lib/create/router";
 import { createRoute, z } from "@hono/zod-openapi";
+import { selectAccessKeySchema } from "@rentlydev/rnota-db";
+import { formatRelative } from "date-fns";
 import * as HttpStatusCodes from "stoker/http-status-codes";
 import { jsonContent, jsonContentRequired } from "stoker/openapi/helpers";
 import { createErrorSchema, createMessageObjectSchema } from "stoker/openapi/schemas";
-
-import { selectAccessKeySchema } from "@rentlydev/rnota-db";
-import { formatRelative } from "date-fns";
-
 import { DEFAULT_ACCESS_KEY_EXPIRY } from "@/api/lib/constants";
+import { createRouter } from "@/api/lib/create/router";
 import { DEFAULT_AUTH_RESPONSES } from "@/api/lib/openapi/open-api-responses";
 import { createMessageSchema, textContent } from "@/api/lib/openapi/schemas";
 import { STRINGS } from "@/api/utils/strings";
@@ -70,7 +68,7 @@ const formatRelativeDateFromNow = (date: Date | string): string => {
  * Schema for validating Time To Live (TTL) values
  * Ensures TTL is a non-negative integer or null
  */
-const TtlSchema = z.number().int().min(0).nullish().openapi({
+const TtlSchema = z.number().int().min(0).nullish().meta({
 	description:
 		"The time to live for the access key in milliseconds. If not provided, defaults to system default expiry time.",
 });
@@ -79,7 +77,7 @@ const TtlSchema = z.number().int().min(0).nullish().openapi({
  * Schema for single access key response
  * Includes full access key details with masked token
  */
-const AccessKeyResponseSchema = z.object({ accessKey: selectAccessKeySchema }).openapi({
+const AccessKeyResponseSchema = z.object({ accessKey: selectAccessKeySchema }).meta({
 	description: "Returns the access key details with masked token for security",
 });
 
@@ -87,7 +85,7 @@ const AccessKeyResponseSchema = z.object({ accessKey: selectAccessKeySchema }).o
  * Schema for multiple access keys response
  * Returns array of access keys with masked tokens
  */
-const AccessKeysResponseSchema = z.object({ accessKeys: z.array(selectAccessKeySchema) }).openapi({
+const AccessKeysResponseSchema = z.object({ accessKeys: z.array(selectAccessKeySchema) }).meta({
 	description: "Returns an array of access keys with masked tokens, sorted by creation date",
 });
 
@@ -97,11 +95,11 @@ const AccessKeysResponseSchema = z.object({ accessKeys: z.array(selectAccessKeyS
  */
 const DeleteAccessKeyBodySchema = z
 	.object({
-		name: z.string().openapi({
+		name: z.string().meta({
 			description: "The unique name of the access key to delete",
 		}),
 	})
-	.openapi({
+	.meta({
 		description: "Request body for deleting an access key by name",
 	});
 
@@ -112,14 +110,14 @@ const DeleteAccessKeyBodySchema = z
 const AddAccessKeyBodySchema = z
 	.object({
 		ttl: TtlSchema,
-		name: z.string().openapi({
+		name: z.string().meta({
 			description: "The unique name for the new access key",
 		}),
-		createdBy: z.string().openapi({
+		createdBy: z.string().meta({
 			description: "The machine hostname or identifier that created the access key",
 		}),
 	})
-	.openapi({
+	.meta({
 		description: "Request body for creating a new access key with optional expiration",
 	});
 
@@ -130,14 +128,14 @@ const AddAccessKeyBodySchema = z
 const PatchAccessKeyBodySchema = z
 	.object({
 		ttl: TtlSchema,
-		oldName: z.string().openapi({
+		oldName: z.string().meta({
 			description: "The current name of the access key to update",
 		}),
-		newName: z.string().optional().openapi({
+		newName: z.string().optional().meta({
 			description: "Optional new name for the access key",
 		}),
 	})
-	.openapi({
+	.meta({
 		description: "Request body for updating an access key's name or TTL",
 	});
 
@@ -185,7 +183,7 @@ const DeleteAllAccessKeysRoute = createRoute({
  * Schema for validating the createdBy parameter in delete access keys route
  */
 const DeleteAccessKeysCreatedByParamsSchema = z.object({
-	createdBy: z.string().openapi({
+	createdBy: z.string().meta({
 		description: "The machine hostname or identifier that created the access keys to delete",
 		param: {
 			in: "path",
@@ -406,8 +404,8 @@ const AccessKeyRouter = createRouter()
 
 		const accessKeyToUpdate = await storage.getAccessKeyByName(userId, oldName);
 
-		let newAccessKeyName = undefined;
-		let expiresAt = undefined;
+		let newAccessKeyName: string | undefined;
+		let expiresAt: string | undefined;
 
 		if (newName) {
 			newAccessKeyName = newName.trim();
@@ -453,6 +451,7 @@ const AccessKeyRouter = createRouter()
 
 		return c.json({ message: STRINGS.ACCESS_KEY_REMOVED(accessKey.name) }, HttpStatusCodes.OK);
 	});
+
 // .openapi(getAccessKeyRoute, async (c) => {
 // 	const storage = c.get("storage");
 // 	const userId = c.get("user").id;

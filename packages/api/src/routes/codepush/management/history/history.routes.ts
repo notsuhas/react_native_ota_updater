@@ -23,15 +23,14 @@
  * @module routes/codepush/management/history
  */
 
-import { createRouter } from "@/api/lib/create/router";
 import { createRoute, z } from "@hono/zod-openapi";
+import { Permission } from "@rentlydev/rnota-db";
+import { RedisUtilities } from "@rentlydev/rnota-redis";
 import type { Context } from "hono";
 import * as HttpStatusCodes from "stoker/http-status-codes";
 import { jsonContent } from "stoker/openapi/helpers";
 import { createErrorSchema, createMessageObjectSchema } from "stoker/openapi/schemas";
-
-import { Permission } from "@rentlydev/rnota-db";
-import { RedisUtilities } from "@rentlydev/rnota-redis";
+import { createRouter } from "@/api/lib/create/router";
 
 import type { AppBindings } from "@/api/lib/types";
 import { AppNamePlatformDeploymentQuerySchema, DeploymentReleaseHistoryResponseSchema } from "@/api/schemas/common";

@@ -17,9 +17,10 @@
  *
  * @throws {Response} 426 Upgrade Required - If the CLI version is less than the server version
  */
-import { createFactoryMiddleware } from "@/api/lib/create/router";
+
 import * as semver from "semver";
 import * as HttpStatusCodes from "stoker/http-status-codes";
+import { createFactoryMiddleware } from "@/api/lib/create/router";
 
 import { getCliVersion } from "@/api/utils/codepush/rest-headers";
 import { STRINGS } from "@/api/utils/strings";

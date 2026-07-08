@@ -108,7 +108,7 @@ export default class ReleasePromote extends EnsureAuthCommand {
 	 * @returns {number | undefined} Parsed rollout percentage or undefined
 	 */
 	public getRolloutValue(input: string | undefined): number | undefined {
-		return input ? Number.parseInt(input.replace("%", "")) : undefined;
+		return input ? Number.parseInt(input.replace("%", ""), 10) : undefined;
 	}
 
 	/**

@@ -4,7 +4,7 @@
  * in the correct order to handle foreign key dependencies.
  */
 
-import { type Table, getTableName, sql } from "drizzle-orm";
+import { getTableName, sql, type Table } from "drizzle-orm";
 import { db } from "../client";
 import * as schema from "../schema";
 

@@ -4,7 +4,7 @@
  * @module OpenAPIConfig
  */
 
-import { apiReference } from "@scalar/hono-api-reference";
+import { Scalar } from "@scalar/hono-api-reference";
 
 import { BASE_API_PATH } from "@/api/lib/constants";
 import type { AppOpenAPI } from "@/api/lib/types";
@@ -52,12 +52,10 @@ export default function configureOpenAPI(app: AppOpenAPI) {
 	// Set up interactive API reference UI
 	app.get(
 		"/reference",
-		apiReference({
+		Scalar({
 			// UI Configuration
 			pageTitle: "React Native Updater Open API Reference",
-			spec: {
-				url: `${BASE_API_PATH}/doc`,
-			},
+			url: `${BASE_API_PATH}/doc`,
 			theme: "kepler",
 			layout: "classic",
 			darkMode: true,

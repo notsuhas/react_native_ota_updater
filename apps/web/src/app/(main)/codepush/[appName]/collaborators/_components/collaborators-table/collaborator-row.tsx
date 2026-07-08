@@ -1,5 +1,7 @@
 "use client";
 
+import { Edit2, Loader, Trash2 } from "lucide-react";
+import { useState } from "react";
 import {
 	AlertDialog,
 	AlertDialogAction,
@@ -18,8 +20,6 @@ import {
 	useDeleteCollaboratorMutation,
 	useUpdateCollaboratorPermissionMutation,
 } from "@/web/lib/client/codepush-queries";
-import { Edit2, Loader, Trash2 } from "lucide-react";
-import { useState } from "react";
 
 type Collaborator = {
 	user: {

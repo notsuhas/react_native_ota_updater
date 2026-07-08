@@ -9,6 +9,7 @@ interface CodePushMutationData {
 }
 
 export default function AddNewCodePushApp() {
+	// biome-ignore lint/correctness/useHookAtTopLevel: hook factory passed as a prop to AddAppDialog which calls it at its top level
 	const mutation = (onSuccess: () => void) => useAddAppMutation(onSuccess);
 
 	const onSubmitDataTransform = (data: AddAppFormValue): CodePushMutationData => ({

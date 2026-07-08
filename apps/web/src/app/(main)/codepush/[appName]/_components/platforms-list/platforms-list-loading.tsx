@@ -11,8 +11,8 @@ export default function PlatformsListSkeleton() {
 					<Skeleton className="h-6 w-6 rounded-full" />
 				</CardHeader>
 
-				<CardContent className="flex flex-col flex-grow">
-					<Skeleton className="h-4 w-3/4 mb-4 flex-grow" />
+				<CardContent className="flex flex-col grow">
+					<Skeleton className="h-4 w-3/4 mb-4 grow" />
 
 					<div className="flex items-center">
 						<Skeleton className="h-4 w-24 rounded" />
@@ -27,8 +27,8 @@ export default function PlatformsListSkeleton() {
 					<Skeleton className="h-6 w-6 rounded-full" />
 				</CardHeader>
 
-				<CardContent className="flex flex-col flex-grow">
-					<Skeleton className="h-4 w-3/4 mb-4 flex-grow" />
+				<CardContent className="flex flex-col grow">
+					<Skeleton className="h-4 w-3/4 mb-4 grow" />
 
 					<div className="flex items-center mt-auto">
 						<Skeleton className="h-4 w-24 rounded" />

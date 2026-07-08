@@ -11,9 +11,8 @@
  * @module common/ensure-auth-command
  */
 
-import { BaseCommand } from "./base-command.js";
-
 import { credentialsVault } from "../services/credentials-vault.js";
+import { BaseCommand } from "./base-command.js";
 
 /**
  * Base class for authenticated commands

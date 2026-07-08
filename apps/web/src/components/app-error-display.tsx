@@ -29,7 +29,7 @@ export default function ErrorDisplay({
 				</CardHeader>
 
 				<CardContent className="pt-8 pb-6 px-8">
-					<p className="text-xl leading-relaxed break-words">{error.message}</p>
+					<p className="text-xl leading-relaxed wrap-break-word">{error.message}</p>
 				</CardContent>
 			</Card>
 		</div>

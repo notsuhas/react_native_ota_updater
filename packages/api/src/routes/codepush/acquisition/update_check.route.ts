@@ -15,15 +15,14 @@
  * @module CodePushUpdateCheck
  */
 
-import { createRouter } from "@/api/lib/create/router";
 import { createRoute } from "@hono/zod-openapi";
-import * as HttpStatusCodes from "stoker/http-status-codes";
-import { jsonContent } from "stoker/openapi/helpers";
-import { createErrorSchema } from "stoker/openapi/schemas";
-
 import type { StorageManager } from "@rentlydev/rnota-db";
 import { type CacheableResponse, RedisUtilities } from "@rentlydev/rnota-redis";
 import { UpdateCheckResponseSchema, type UpdateCheckResponseType } from "@rentlydev/rnota-redis/types";
+import * as HttpStatusCodes from "stoker/http-status-codes";
+import { jsonContent } from "stoker/openapi/helpers";
+import { createErrorSchema } from "stoker/openapi/schemas";
+import { createRouter } from "@/api/lib/create/router";
 
 import { INTERNAL_SERVER_ERROR_RESPONSE } from "@/api/lib/openapi/open-api-responses";
 import { createMessageSchema, textContent } from "@/api/lib/openapi/schemas";
@@ -80,10 +79,10 @@ const createResponseUsingStorage = async (
 	}
 
 	// Handle missing patch versions (e.g., "2.0" or "2.0-prerelease")
-	const isMissingPatchVersion = /^\d+\.\d+([\+\-].*)?$/.test(updateRequest.app_version);
+	const isMissingPatchVersion = /^\d+\.\d+([+-].*)?$/.test(updateRequest.app_version);
 	if (isMissingPatchVersion) {
 		originalAppVersion = updateRequest.app_version;
-		const semverTagIndex = originalAppVersion.search(/[\+\-]/);
+		const semverTagIndex = originalAppVersion.search(/[+-]/);
 
 		if (semverTagIndex === -1) {
 			updateRequest.app_version += ".0";

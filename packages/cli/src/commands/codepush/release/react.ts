@@ -24,7 +24,7 @@ import { Args, Flags, type Interfaces } from "@oclif/core";
 import { CLIError } from "@oclif/core/errors";
 // @ts-expect-error
 import g2js from "gradle-to-js";
-import plist, { type PlistValue } from "plist";
+import { parse as parsePlist, type PlistValue } from "plist";
 // @ts-expect-error
 import properties from "properties";
 import { rimraf } from "rimraf";
@@ -312,7 +312,7 @@ export default class ReleaseReact extends EnsureAuthCommand {
 			let parsedPlist: PlistValue;
 
 			try {
-				parsedPlist = plist.parse(plistContents);
+				parsedPlist = parsePlist(plistContents);
 			} catch {
 				throw new CLIError(`Unable to parse "${resolvedPlistFile}". Please ensure it is a well-formed plist file.`);
 			}
@@ -359,9 +359,9 @@ export default class ReleaseReact extends EnsureAuthCommand {
 							`Unable to parse the "${buildGradlePath}" file. Please ensure it is a well-formed Gradle file.`,
 						);
 					})
-					// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+					// biome-ignore lint/suspicious/noExplicitAny: gradle-to-js returns untyped parsed output
 					.then((buildGradle: any) => {
-						let versionName: string | undefined = undefined;
+						let versionName: string | undefined;
 
 						// First 'if' statement was implemented as workaround for case
 						// when 'build.gradle' file contains several 'android' nodes.
@@ -418,7 +418,7 @@ export default class ReleaseReact extends EnsureAuthCommand {
 						];
 
 						// Search for gradle properties across all `gradle.properties` files
-						let propertiesFile: string | undefined = undefined;
+						let propertiesFile: string | undefined;
 						for (let i = 0; i < knownLocations.length; i++) {
 							propertiesFile = knownLocations[i]!;
 							if (fileExists(propertiesFile)) {

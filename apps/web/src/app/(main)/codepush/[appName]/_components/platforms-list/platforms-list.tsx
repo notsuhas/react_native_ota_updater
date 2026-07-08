@@ -1,14 +1,16 @@
 "use client";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/web/components/ui/card";
-import { Icons } from "@/web/components/ui/icons";
-import { getAppQueryOptions } from "@/web/lib/client/codepush-queries";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { ArrowRight, Smartphone } from "lucide-react";
 import Link from "next/link";
+import { Card, CardContent, CardHeader, CardTitle } from "@/web/components/ui/card";
+import { Icons } from "@/web/components/ui/icons";
+import { useRequiredCodePushAppName } from "@/web/hooks/use-codepush-route";
+import { getAppQueryOptions } from "@/web/lib/client/codepush-queries";
 
 export default function PlatformsList() {
-	const { data: app } = useSuspenseQuery(getAppQueryOptions());
+	const appName = useRequiredCodePushAppName();
+	const { data: app } = useSuspenseQuery(getAppQueryOptions({ appName }));
 
 	const navigateToPlatform = (platform: string) => `/codepush/${app?.name}/${platform}`;
 
@@ -27,8 +29,8 @@ export default function PlatformsList() {
 								<PlatformIcon className="h-6 w-6 dark:text-white text-black" />
 							</CardHeader>
 
-							<CardContent className="flex flex-col flex-grow">
-								<p className="text-sm text-muted-foreground mb-4 flex-grow">
+							<CardContent className="flex flex-col grow">
+								<p className="text-sm text-muted-foreground mb-4 grow">
 									Manage deployments and releases for {name} platform.
 								</p>
 								<div className="flex items-center text-sm text-blue-600 dark:text-blue-400 mt-auto">

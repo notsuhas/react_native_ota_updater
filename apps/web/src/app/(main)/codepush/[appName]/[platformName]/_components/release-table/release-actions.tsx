@@ -1,5 +1,10 @@
 "use client";
 
+import { useSuspenseQuery } from "@tanstack/react-query";
+import confetti from "canvas-confetti";
+import { Trash2 } from "lucide-react";
+import { useQueryStates } from "nuqs";
+import { useState } from "react";
 import {
 	AlertDialog,
 	AlertDialogAction,
@@ -12,6 +17,7 @@ import {
 } from "@/web/components/ui/alert-dialog";
 import { Button } from "@/web/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/web/components/ui/select";
+import { useRequiredCodePushPlatformRoute } from "@/web/hooks/use-codepush-route";
 import {
 	getPlatformDeploymentsQueryOptions,
 	useDeleteReleaseMutation,
@@ -19,22 +25,16 @@ import {
 	useRollbackReleaseMutation,
 } from "@/web/lib/client/codepush-queries";
 import { searchParams } from "@/web/lib/searchParams";
-import { useSuspenseQuery } from "@tanstack/react-query";
-import confetti from "canvas-confetti";
-import { Trash2 } from "lucide-react";
-import { useQueryStates } from "nuqs";
-import { useState } from "react";
 
 export function ReleaseActions() {
 	const [{ deployment, label }, setParams] = useQueryStates(searchParams);
-
-	if (!label) return null;
+	const { appName, platformName: platform } = useRequiredCodePushPlatformRoute();
 
 	const [isPromoteDialogOpen, setIsPromoteDialogOpen] = useState(false);
 	const [isRollbackDialogOpen, setIsRollbackDialogOpen] = useState(false);
 	const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
 
-	const { data: platformDeployments } = useSuspenseQuery(getPlatformDeploymentsQueryOptions());
+	const { data: platformDeployments } = useSuspenseQuery(getPlatformDeploymentsQueryOptions({ appName, platform }));
 	const deployments = platformDeployments.filter((d) => d.name !== deployment) ?? [];
 	const defaultDeployment = deployments.length === 1 ? deployments[0]!.name : null;
 
@@ -84,6 +84,8 @@ export function ReleaseActions() {
 	const rollbackMutation = useRollbackReleaseMutation(onRollbackSuccessCallback);
 
 	const deleteMutation = useDeleteReleaseMutation(onDeleteSuccessCallback);
+
+	if (!label) return null;
 
 	return (
 		<>

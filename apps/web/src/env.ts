@@ -1,7 +1,6 @@
+import apiEnv from "@rentlydev/rnota-api/env";
 import { createEnv } from "@t3-oss/env-nextjs";
 import { z } from "zod";
-
-import apiEnv from "@rentlydev/rnota-api/env";
 
 export const env = createEnv({
 	extends: [apiEnv],

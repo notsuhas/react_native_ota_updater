@@ -1,8 +1,8 @@
 "use client";
 
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/web/components/ui/table";
 import { getAllUsersQueryOptions } from "@/web/lib/client/common-queries";
-import { useSuspenseQuery } from "@tanstack/react-query";
 
 import { UserRow } from "./user-row";
 

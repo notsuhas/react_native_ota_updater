@@ -7,9 +7,8 @@
  */
 
 import { Args } from "@oclif/core";
-import { Listr } from "listr2";
-
 import CliTable3 from "cli-table3";
+import { Listr } from "listr2";
 import { EnsureAuthCommand } from "../../../common/ensure-auth-command.js";
 import { sdk } from "../../../services/management-sdk.js";
 

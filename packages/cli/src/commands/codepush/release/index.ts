@@ -245,7 +245,7 @@ export default class Release extends EnsureAuthCommand {
 						ctx.isTemporary = releaseZipFile.isTemporary;
 
 						const releaseManifest = await generatePackageManifestFromZip(ctx.releaseZipFilePath);
-						ctx.packageHash = releaseManifest?.computePackageHash()!;
+						ctx.packageHash = releaseManifest?.computePackageHash() ?? "";
 
 						const fileStats = await this.handleFileStats(ctx.releaseZipFilePath);
 						ctx.size = fileStats.size;

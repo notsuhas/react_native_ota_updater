@@ -1,5 +1,9 @@
 "use client";
 
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 import LoadingSpinner from "@/web/components/loading-spinner";
 import { Button } from "@/web/components/ui/button";
 import {
@@ -13,12 +17,8 @@ import {
 } from "@/web/components/ui/dialog";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/web/components/ui/form";
 import { Input } from "@/web/components/ui/input";
+import { useRequiredCodePushAppName } from "@/web/hooks/use-codepush-route";
 import { useAddDeploymentMutation } from "@/web/lib/client/codepush-queries";
-import { useAppName } from "@/web/store/store";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
 
 const formSchema = z.object({
 	"deployment-name": z.string().min(2, { message: "Deployment name must be at least 2 characters" }),
@@ -27,7 +27,7 @@ const formSchema = z.object({
 type AddDeploymentFormValue = z.infer<typeof formSchema>;
 
 export default function AddNewDeployment() {
-	const appName = useAppName();
+	const appName = useRequiredCodePushAppName();
 
 	const [isDialogOpen, setIsDialogOpen] = useState(false);
 
