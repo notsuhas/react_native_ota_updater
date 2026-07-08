@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![Node.js](https://img.shields.io/badge/node-%3E%3D18-brightgreen.svg)
+![Node.js](https://img.shields.io/badge/node-%3E%3D22-brightgreen.svg)
 ![pnpm](https://img.shields.io/badge/pnpm-%5E10-orange.svg)
 ![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)
 
@@ -315,7 +315,7 @@ pnpm remove:cli             # Unlink CLI
 
 ### Core Technologies
 
-- **Node.js** >= 18 - JavaScript runtime
+- **Node.js** >= 22 - JavaScript runtime
 - **TypeScript** - Type-safe JavaScript
 - **pnpm** - Fast, disk space efficient package manager
 - **Turborepo** - High-performance build system for monorepos
@@ -326,11 +326,11 @@ pnpm remove:cli             # Unlink CLI
 - **Drizzle ORM** - Type-safe database toolkit
 - **PostgreSQL** - Primary database
 - **Redis** - Caching and session storage
-- **Auth.js** - Authentication framework
+- **Better Auth** - Authentication framework
 
 ### Frontend
 
-- **Next.js 15** - React framework
+- **Next.js 16** - React framework
 - **Tailwind CSS** - Utility-first CSS framework
 - **Shadcn UI** - Accessible component primitives
 - **TanStack Query** - Data fetching and caching
