@@ -1,5 +1,5 @@
 # Base image with Node.js
-FROM node:20.11.1-alpine AS base
+FROM node:22-alpine AS base
 
 # Update package index and install system dependencies
 RUN apk update --no-cache

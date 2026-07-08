@@ -1,22 +1,43 @@
 packages:
-- apps/*
-- internal/*
-- packages/*
-- shared/*
-- tooling/*
+  - apps/*
+  - internal/*
+  - packages/*
+  - shared/*
+  - tooling/*
+
+allowBuilds:
+  '@swc/core': true
+  esbuild: true
+  sharp: true
 
 catalog:
-  "@t3-oss/env-nextjs": "^0.12.0"
-  tsc-alias: ^1.8.10
-  hono: ^4.6.14
-  typescript: ^5.7.3
-  tsx: ^4.19.2
-  zod: ^3.24.1
-  dotenv-cli: ^7.4.4
-  semver: ^7.7.1
+  "@t3-oss/env-nextjs": "^0.13.11"
+  date-fns: ^4.4.0
+  tsc-alias: ^1.8.17
+  hono: ^4.12.25
+  typescript: ^6.0.3
+  tsx: ^4.22.4
+  zod: ^4.4.3
+  dotenv-cli: ^11.0.0
+  semver: ^7.8.4
 
 catalogs:
-  node20:
-    '@types/node': ^20.17.12
-  node18:
-    '@types/node': ^18.19.70
+  node22:
+    '@types/node': ^25.9.3
+
+overrides:
+  "@types/react": "19.2.17"
+  "@types/react-dom": "19.2.3"
+  # Pin to the previous patch: 1.11.1 was published <24h ago and trips
+  # pnpm's minimumReleaseAge supply-chain guard. Transitive via sharp
+  # (next). Drop this override once 1.11.1 has aged out.
+  "@emnapi/runtime": "1.11.0"
+  # nuqs pulls react-router as an (unused) optional peer; force a patched
+  # version to clear the react-router XSS advisories (GHSA-2w69-qvjg-hvjx,
+  # -8v8x-cx79-35w7). This is a Next app — react-router is never used.
+  "react-router": "^7.12.0"
+
+peerDependencyRules:
+  allowedVersions:
+    next-runtime-env>next: "^16.0.0"
+    next-runtime-env>react: "^19.0.0"
