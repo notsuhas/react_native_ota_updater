@@ -154,20 +154,20 @@ importers:
         specifier: ^1.18.0
         version: 1.23.0(react@19.2.7)
       next:
-        specifier: 16.2.10
-        version: 16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+        specifier: 16.2.12
+        version: 16.2.12(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       next-runtime-env:
         specifier: ^3.3.0
-        version: 3.3.0(next@16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)
+        version: 3.3.0(next@16.2.12(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)
       next-themes:
         specifier: ^0.4.6
         version: 0.4.6(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       nextjs-toploader:
         specifier: ^3.9.17
-        version: 3.9.17(next@16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+        version: 3.9.17(next@16.2.12(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       nuqs:
         specifier: ^2.9.0
-        version: 2.9.0(next@16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)
+        version: 2.9.0(next@16.2.12(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)
       react:
         specifier: 19.2.7
         version: 19.2.7
@@ -339,7 +339,7 @@ importers:
         version: 0.13.11(typescript@6.0.3)(zod@4.4.3)
       ioredis:
         specifier: ^5.11.1
-        version: 5.11.1
+        version: 5.11.1(supports-color@8.1.1)
       zod:
         specifier: 'catalog:'
         version: 4.4.3
@@ -369,8 +369,8 @@ importers:
   packages/api:
     dependencies:
       '@hono/node-server':
-        specifier: ^2.0.4
-        version: 2.0.8(hono@4.12.28)
+        specifier: ^2.0.12
+        version: 2.0.12(hono@4.12.28)
       '@hono/zod-openapi':
         specifier: ^1.4.0
         version: 1.4.0(hono@4.12.28)(zod@4.4.3)
@@ -464,7 +464,7 @@ importers:
         version: link:../../shared/api-client
       axios:
         specifier: ^1.17.0
-        version: 1.18.1
+        version: 1.18.1(supports-color@8.1.1)
       backslash:
         specifier: ^0.2.2
         version: 0.2.2
@@ -515,7 +515,7 @@ importers:
         version: 0.9.4
       tsup:
         specifier: ^8.5.1
-        version: 8.5.1(@swc/core@1.10.7(@swc/helpers@0.5.15))(jiti@2.7.0)(postcss@8.5.16)(tsx@4.23.0)(typescript@6.0.3)(yaml@2.8.3)
+        version: 8.5.1(@swc/core@1.10.7(@swc/helpers@0.5.15))(jiti@2.7.0)(postcss@8.5.16)(supports-color@8.1.1)(tsx@4.23.0)(typescript@6.0.3)(yaml@2.8.3)
       which:
         specifier: ^7.0.0
         version: 7.0.0
@@ -531,7 +531,7 @@ importers:
     devDependencies:
       '@oclif/test':
         specifier: 4.1.18
-        version: 4.1.18(@oclif/core@4.11.14)
+        version: 4.1.18(@oclif/core@4.11.14)(supports-color@8.1.1)
       '@rentlydev/rnota-tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript
@@ -573,7 +573,7 @@ importers:
         version: 11.7.6
       oclif:
         specifier: ^4.23.14
-        version: 4.23.27(@types/node@25.9.4)
+        version: 4.23.27(@types/node@25.9.4)(supports-color@8.1.1)
       shx:
         specifier: ^0.4.0
         version: 0.4.0
@@ -604,7 +604,7 @@ importers:
         version: 1.9.0
       tsup:
         specifier: ^8.5.1
-        version: 8.5.1(@swc/core@1.10.7(@swc/helpers@0.5.15))(jiti@2.7.0)(postcss@8.5.16)(tsx@4.23.0)(typescript@6.0.3)(yaml@2.8.3)
+        version: 8.5.1(@swc/core@1.10.7(@swc/helpers@0.5.15))(jiti@2.7.0)(postcss@8.5.16)(supports-color@8.1.1)(tsx@4.23.0)(typescript@6.0.3)(yaml@2.8.3)
       tsx:
         specifier: 'catalog:'
         version: 4.23.0
@@ -922,11 +922,11 @@ packages:
 
   '@esbuild-kit/core-utils@3.3.2':
     resolution: {integrity: sha512-sPRAnw9CdSsRmEtnsl2WXWdyquogVpB3yZ3dgwJfe8zrOzTsV7cJvmwrKVa+0ma5BoiGJ+BoqkMvawbayKUsqQ==}
-    deprecated: 'Merged into tsx: https://tsx.is'
+    deprecated: 'Merged into tsx: https://tsx.hirok.io'
 
   '@esbuild-kit/esm-loader@2.6.5':
     resolution: {integrity: sha512-FxEMIkJKnodyA1OaCUoEvbYRkoZlLZ4d/eXFu9Fh8CbBBgP5EmZxrfTRyN0qpXZ4vOvqnE5YdRdcrmUUXuU+dA==}
-    deprecated: 'Merged into tsx: https://tsx.is'
+    deprecated: 'Merged into tsx: https://tsx.hirok.io'
 
   '@esbuild/aix-ppc64@0.25.12':
     resolution: {integrity: sha512-Hhmwd6CInZ3dwpuGTF8fJG6yoWmsToE+vYgD4nytZVxcu1ulHpUQRAB1UJ8+N1Am3Mz4+xOByoQoSZf4D+CpkA==}
@@ -1547,8 +1547,8 @@ packages:
   '@floating-ui/utils@0.2.9':
     resolution: {integrity: sha512-MDWhGtE+eHw5JW7lq4qhc5yRLS11ERl1c7Z6Xd0a58DozHES6EnNNwUWbMiG4J9Cgj053Bhk8zvlhFYKVhULwg==}
 
-  '@hono/node-server@2.0.8':
-    resolution: {integrity: sha512-GuCWzLxwg218fy1JaHculFsdcuY12hxit83V+algozTPnwhNjLrRL/Alg9OYjLZLoUZ1rw/S4CdTMsnkSKCmFA==}
+  '@hono/node-server@2.0.12':
+    resolution: {integrity: sha512-eWpQYr67tqJLeaSUl0Q+TquuYfUdTibpOJlUMV2FfUP7+KqCC5TufnwnlXL6mobZBJbGAYRd7ZvEBDCbLInjhg==}
     engines: {node: '>=20'}
     peerDependencies:
       hono: ^4
@@ -2063,8 +2063,17 @@ packages:
   '@next/env@16.2.10':
     resolution: {integrity: sha512-zLPxg9M0MEHmygpj5OuxjQ+vHMiy/K7cSp74G8ecYolmgUWw0RwN02tF56npup/+qaI8JB97hQgS/r2Hb6QwVA==}
 
+  '@next/env@16.2.12':
+    resolution: {integrity: sha512-d0Z5Bc13Fa4nR8pFAKx2jay2yhJM16vlfHbTzYnUQAxlNb6B6lmn4hjt69lYNt4kRtyYP6gEM49lPRHNbIyneg==}
+
   '@next/swc-darwin-arm64@16.2.10':
     resolution: {integrity: sha512-v9IdJCa0H0mbo+8z5zwUpOk1Vj7RjkcI5uNYf5Ws1y6szf/p3Mzl9hLaST8SCt6L9h8NGnruZcd2+o0NTNwDhA==}
+    engines: {node: '>= 10'}
+    cpu: [arm64]
+    os: [darwin]
+
+  '@next/swc-darwin-arm64@16.2.12':
+    resolution: {integrity: sha512-0W1R0teHWJrqKX0FH20IzzIWAOuGtBxPGuObrxy1lE8hQvCFj49KE8a3WUg0D7sq6rn6zkM4c7YGUnhudBS6oA==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [darwin]
@@ -2075,8 +2084,21 @@ packages:
     cpu: [x64]
     os: [darwin]
 
+  '@next/swc-darwin-x64@16.2.12':
+    resolution: {integrity: sha512-Hy5Ls099+aFUmOLmIgPfLqNi6iCwhL3uQCssz5rWk+5Nkc6TUKCE83DY5BbNylfm3+mfwcSFnLRfrZDJhVxdtw==}
+    engines: {node: '>= 10'}
+    cpu: [x64]
+    os: [darwin]
+
   '@next/swc-linux-arm64-gnu@16.2.10':
     resolution: {integrity: sha512-GRQRsRtuciNJvB54AvvuQTiq0oZtFwa1owQqtZD8wwnGpM2L39MV22kpI72YSXLKIyY40LC66EiLFv4PiicXxg==}
+    engines: {node: '>= 10'}
+    cpu: [arm64]
+    os: [linux]
+    libc: [glibc]
+
+  '@next/swc-linux-arm64-gnu@16.2.12':
+    resolution: {integrity: sha512-+YqU2h1cQkHsGfvjAsrSmst8UIFBibBGm5x3Xgel8NLMiDQtNOM4sM2GOEMvG5YiOBNeN/Ykk8cQC2S0Xrqljg==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
@@ -2089,8 +2111,22 @@ packages:
     os: [linux]
     libc: [musl]
 
+  '@next/swc-linux-arm64-musl@16.2.12':
+    resolution: {integrity: sha512-0qjhiYBaKAqF63LA1ZWAAnKTzFUguAaZiRa5etMLGGPj/B6uEVjtIZldIzFEp3wHlB0koK6aTzqPtSdplTCjoA==}
+    engines: {node: '>= 10'}
+    cpu: [arm64]
+    os: [linux]
+    libc: [musl]
+
   '@next/swc-linux-x64-gnu@16.2.10':
     resolution: {integrity: sha512-iCVJnwvrPYECvA6WM/7+oo+OiTvedIKLxtCLAZP4xZR3nXa1zmzZyLPbYCmWvpd4CvMYF1EMTafd0ii3DygLvA==}
+    engines: {node: '>= 10'}
+    cpu: [x64]
+    os: [linux]
+    libc: [glibc]
+
+  '@next/swc-linux-x64-gnu@16.2.12':
+    resolution: {integrity: sha512-7A3q26W+h7gnA15uqBToNuDqBEFZZcqh0mW2mn4AJh/G5pdg2RVE3n4slzLEliASZFG3NmsbEzng/x2Sh09mBg==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
@@ -2103,14 +2139,33 @@ packages:
     os: [linux]
     libc: [musl]
 
+  '@next/swc-linux-x64-musl@16.2.12':
+    resolution: {integrity: sha512-qSjL/uppm+cbh21s72Ss8gkiOhQ4dExWHNGOWy6eZV7STj5WsKehgxT61beSsOj+YYQuTplL376lOCdMQU5T8w==}
+    engines: {node: '>= 10'}
+    cpu: [x64]
+    os: [linux]
+    libc: [musl]
+
   '@next/swc-win32-arm64-msvc@16.2.10':
     resolution: {integrity: sha512-DwAnhLX76HQiFFQNgWlcK+JzlnD1rZ+UK/WY0ZMI/deXpvgnesjNYrqcfo1JzBuz4Kf7o3brIBL0glI1junatA==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [win32]
 
+  '@next/swc-win32-arm64-msvc@16.2.12':
+    resolution: {integrity: sha512-X6hzsOUJac/e7AWSbn9gQ9nzHld1xWP5iyjHpYWvud8pufB679O1xg4JDyKr8Xd69Jvd+kM2Der6uftiZCmjYA==}
+    engines: {node: '>= 10'}
+    cpu: [arm64]
+    os: [win32]
+
   '@next/swc-win32-x64-msvc@16.2.10':
     resolution: {integrity: sha512-0JXq3b85Jk9Jg4ntLUbXSPvoDw3gpZou7twuKdoFG2jOw635v7+IiXfTaa0TxVMyx78pUjnrVYwLgjKfX4e6/A==}
+    engines: {node: '>= 10'}
+    cpu: [x64]
+    os: [win32]
+
+  '@next/swc-win32-x64-msvc@16.2.12':
+    resolution: {integrity: sha512-F6fakeHuFTLOPt0bslQJdf+xtT+WIP9DVn/m4y1w1mRnVPyh3D/cNvzlRkxM444xfm+IvvYNSOrKiA2CDJ0Uxw==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [win32]
@@ -4558,6 +4613,27 @@ packages:
       sass:
         optional: true
 
+  next@16.2.12:
+    resolution: {integrity: sha512-iD59eYQWmbFcEbX7v/acG5DRym9iw1DdaPoD0WTA920naWsE25wShzJW4+UvAs8MK9EC2kBfIH6vtto1H1PHGw==}
+    engines: {node: '>=20.9.0'}
+    hasBin: true
+    peerDependencies:
+      '@opentelemetry/api': ^1.1.0
+      '@playwright/test': ^1.51.1
+      babel-plugin-react-compiler: '*'
+      react: ^18.2.0 || 19.0.0-rc-de68d2f4-20241204 || ^19.0.0
+      react-dom: ^18.2.0 || 19.0.0-rc-de68d2f4-20241204 || ^19.0.0
+      sass: ^1.3.0
+    peerDependenciesMeta:
+      '@opentelemetry/api':
+        optional: true
+      '@playwright/test':
+        optional: true
+      babel-plugin-react-compiler:
+        optional: true
+      sass:
+        optional: true
+
   nextjs-toploader@3.9.17:
     resolution: {integrity: sha512-9OF0KSSLtoSAuNg2LZ3aTl4hR9mBDj5L9s9DZiFCbMlXehyICGjkIz5dVGzuATU2bheJZoBdFgq9w07AKSuQQw==}
     peerDependencies:
@@ -6342,7 +6418,7 @@ snapshots:
 
   '@floating-ui/utils@0.2.9': {}
 
-  '@hono/node-server@2.0.8(hono@4.12.28)':
+  '@hono/node-server@2.0.12(hono@4.12.28)':
     dependencies:
       hono: 4.12.28
 
@@ -6807,28 +6883,54 @@ snapshots:
 
   '@next/env@16.2.10': {}
 
+  '@next/env@16.2.12': {}
+
   '@next/swc-darwin-arm64@16.2.10':
+    optional: true
+
+  '@next/swc-darwin-arm64@16.2.12':
     optional: true
 
   '@next/swc-darwin-x64@16.2.10':
     optional: true
 
+  '@next/swc-darwin-x64@16.2.12':
+    optional: true
+
   '@next/swc-linux-arm64-gnu@16.2.10':
+    optional: true
+
+  '@next/swc-linux-arm64-gnu@16.2.12':
     optional: true
 
   '@next/swc-linux-arm64-musl@16.2.10':
     optional: true
 
+  '@next/swc-linux-arm64-musl@16.2.12':
+    optional: true
+
   '@next/swc-linux-x64-gnu@16.2.10':
+    optional: true
+
+  '@next/swc-linux-x64-gnu@16.2.12':
     optional: true
 
   '@next/swc-linux-x64-musl@16.2.10':
     optional: true
 
+  '@next/swc-linux-x64-musl@16.2.12':
+    optional: true
+
   '@next/swc-win32-arm64-msvc@16.2.10':
     optional: true
 
+  '@next/swc-win32-arm64-msvc@16.2.12':
+    optional: true
+
   '@next/swc-win32-x64-msvc@16.2.10':
+    optional: true
+
+  '@next/swc-win32-x64-msvc@16.2.12':
     optional: true
 
   '@noble/ciphers@2.2.0': {}
@@ -6881,18 +6983,18 @@ snapshots:
     transitivePeerDependencies:
       - '@types/node'
 
-  '@oclif/plugin-warn-if-update-available@3.1.68':
+  '@oclif/plugin-warn-if-update-available@3.1.68(supports-color@8.1.1)':
     dependencies:
       '@oclif/core': 4.11.14
       ansis: 3.17.0
       debug: 4.4.3(supports-color@8.1.1)
-      http-call: 5.3.0
+      http-call: 5.3.0(supports-color@8.1.1)
       lodash: 4.18.1
       registry-auth-token: 5.1.1
     transitivePeerDependencies:
       - supports-color
 
-  '@oclif/test@4.1.18(@oclif/core@4.11.14)':
+  '@oclif/test@4.1.18(@oclif/core@4.11.14)(supports-color@8.1.1)':
     dependencies:
       '@oclif/core': 4.11.14
       ansis: 3.17.0
@@ -7774,7 +7876,7 @@ snapshots:
 
   acorn@8.16.0: {}
 
-  agent-base@6.0.2:
+  agent-base@6.0.2(supports-color@8.1.1):
     dependencies:
       debug: 4.4.3(supports-color@8.1.1)
     transitivePeerDependencies:
@@ -7851,11 +7953,11 @@ snapshots:
       stubborn-fs: 1.2.5
       when-exit: 2.1.4
 
-  axios@1.18.1:
+  axios@1.18.1(supports-color@8.1.1):
     dependencies:
       follow-redirects: 1.16.0
       form-data: 4.0.6
-      https-proxy-agent: 5.0.1
+      https-proxy-agent: 5.0.1(supports-color@8.1.1)
       proxy-from-env: 2.1.0
     transitivePeerDependencies:
       - debug
@@ -8668,7 +8770,7 @@ snapshots:
 
   http-cache-semantics@4.1.1: {}
 
-  http-call@5.3.0:
+  http-call@5.3.0(supports-color@8.1.1):
     dependencies:
       content-type: 1.0.5
       debug: 4.4.3(supports-color@8.1.1)
@@ -8686,9 +8788,9 @@ snapshots:
       quick-lru: 5.1.1
       resolve-alpn: 1.2.1
 
-  https-proxy-agent@5.0.1:
+  https-proxy-agent@5.0.1(supports-color@8.1.1):
     dependencies:
-      agent-base: 6.0.2
+      agent-base: 6.0.2(supports-color@8.1.1)
       debug: 4.4.3(supports-color@8.1.1)
     transitivePeerDependencies:
       - supports-color
@@ -8714,7 +8816,7 @@ snapshots:
 
   interpret@1.4.0: {}
 
-  ioredis@5.11.1:
+  ioredis@5.11.1(supports-color@8.1.1):
     dependencies:
       '@ioredis/commands': 1.10.0
       cluster-key-slot: 1.1.1
@@ -9045,9 +9147,9 @@ snapshots:
 
   nanostores@1.3.0: {}
 
-  next-runtime-env@3.3.0(next@16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7):
+  next-runtime-env@3.3.0(next@16.2.12(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7):
     dependencies:
-      next: 16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+      next: 16.2.12(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       react: 19.2.7
 
   next-themes@0.4.6(react-dom@19.2.7(react@19.2.7))(react@19.2.7):
@@ -9079,9 +9181,33 @@ snapshots:
       - '@babel/core'
       - babel-plugin-macros
 
-  nextjs-toploader@3.9.17(next@16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react-dom@19.2.7(react@19.2.7))(react@19.2.7):
+  next@16.2.12(react-dom@19.2.7(react@19.2.7))(react@19.2.7):
     dependencies:
-      next: 16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+      '@next/env': 16.2.12
+      '@swc/helpers': 0.5.15
+      baseline-browser-mapping: 2.10.42
+      caniuse-lite: 1.0.30001802
+      postcss: 8.4.31
+      react: 19.2.7
+      react-dom: 19.2.7(react@19.2.7)
+      styled-jsx: 5.1.6(react@19.2.7)
+    optionalDependencies:
+      '@next/swc-darwin-arm64': 16.2.12
+      '@next/swc-darwin-x64': 16.2.12
+      '@next/swc-linux-arm64-gnu': 16.2.12
+      '@next/swc-linux-arm64-musl': 16.2.12
+      '@next/swc-linux-x64-gnu': 16.2.12
+      '@next/swc-linux-x64-musl': 16.2.12
+      '@next/swc-win32-arm64-msvc': 16.2.12
+      '@next/swc-win32-x64-msvc': 16.2.12
+      sharp: 0.34.5
+    transitivePeerDependencies:
+      - '@babel/core'
+      - babel-plugin-macros
+
+  nextjs-toploader@3.9.17(next@16.2.12(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react-dom@19.2.7(react@19.2.7))(react@19.2.7):
+    dependencies:
+      next: 16.2.12(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       nprogress: 0.2.0
       prop-types: 15.8.1
       react: 19.2.7
@@ -9110,16 +9236,16 @@ snapshots:
 
   nprogress@0.2.0: {}
 
-  nuqs@2.9.0(next@16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7):
+  nuqs@2.9.0(next@16.2.12(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7):
     dependencies:
       '@standard-schema/spec': 1.0.0
       react: 19.2.7
     optionalDependencies:
-      next: 16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+      next: 16.2.12(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
 
   object-assign@4.1.1: {}
 
-  oclif@4.23.27(@types/node@25.9.4):
+  oclif@4.23.27(@types/node@25.9.4)(supports-color@8.1.1):
     dependencies:
       '@aws-sdk/client-cloudfront': 3.1080.0
       '@aws-sdk/client-s3': 3.1080.0
@@ -9129,7 +9255,7 @@ snapshots:
       '@oclif/core': 4.11.14
       '@oclif/plugin-help': 6.2.53
       '@oclif/plugin-not-found': 3.2.88(@types/node@25.9.4)
-      '@oclif/plugin-warn-if-update-available': 3.1.68
+      '@oclif/plugin-warn-if-update-available': 3.1.68(supports-color@8.1.1)
       ansis: 3.17.0
       async-retry: 1.3.3
       change-case: 4.1.2
@@ -9865,7 +9991,7 @@ snapshots:
 
   tslib@2.8.1: {}
 
-  tsup@8.5.1(@swc/core@1.10.7(@swc/helpers@0.5.15))(jiti@2.7.0)(postcss@8.5.16)(tsx@4.23.0)(typescript@6.0.3)(yaml@2.8.3):
+  tsup@8.5.1(@swc/core@1.10.7(@swc/helpers@0.5.15))(jiti@2.7.0)(postcss@8.5.16)(supports-color@8.1.1)(tsx@4.23.0)(typescript@6.0.3)(yaml@2.8.3):
     dependencies:
       bundle-require: 5.1.0(esbuild@0.27.7)
       cac: 6.7.14
