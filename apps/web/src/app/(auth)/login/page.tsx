@@ -10,8 +10,8 @@
  * - Uses Better Auth's `getSessionFromHeaders(await headers())` instead of
  *   the old next-auth `auth()` server call; the underlying mechanism is a
  *   cookie → `session` row lookup, not a JWT decode
- * - `callbackUrl` defaults to `PAGES.HOME` and is forwarded into the client
- *   `GithubSignInButton` via `useSearchParams`
+ * - `callbackUrl` is narrowed by `getSafeCallbackUrl` before any redirect, and
+ *   is forwarded into the client `GithubSignInButton` via `useSearchParams`
  */
 
 import { getSessionFromHeaders } from "@rentlydev/rnota-auth/session";
@@ -22,7 +22,7 @@ import { Suspense } from "react";
 import GithubSignInButton from "@/web/components/github-button";
 import GithubSignInButtonLoading from "@/web/components/github-button/loading";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/web/components/ui/card";
-import { PAGES } from "@/web/lib/constants";
+import { getSafeCallbackUrl } from "@/web/lib/safe-redirect";
 import pkgJson from "../../../../package.json";
 
 /**
@@ -49,10 +49,10 @@ interface LoginPageProps {
  * ```
  */
 export default async function LoginPage({ searchParams }: LoginPageProps) {
-	const { callbackUrl = PAGES.HOME } = await searchParams;
+	const { callbackUrl } = await searchParams;
 	const session = await getSessionFromHeaders(await headers());
 
-	if (session) redirect(callbackUrl);
+	if (session) redirect(getSafeCallbackUrl(callbackUrl));
 
 	return (
 		<div className="w-full max-w-sm">

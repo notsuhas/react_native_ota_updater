@@ -83,8 +83,10 @@ export const UpdateCheckRequestQuerySchema = z
 			},
 		}),
 
-		is_companion: z.coerce
-			.boolean()
+		// Not z.coerce.boolean() — that is Boolean(value), so "false" and "0" both come through as true
+		is_companion: z
+			.string()
+			.transform((v) => v === "true" || v === "1")
 			.nullish()
 			.meta({
 				description: "Boolean flag indicating whether the request is a companion app",

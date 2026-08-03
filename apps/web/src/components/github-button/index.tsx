@@ -28,7 +28,7 @@ import LoadingSpinner from "@/web/components/loading-spinner";
 import { Button } from "@/web/components/ui/button";
 import { Checkbox } from "@/web/components/ui/checkbox";
 import { Icons } from "@/web/components/ui/icons";
-import { PAGES } from "@/web/lib/constants";
+import { getSafeCallbackUrl } from "@/web/lib/safe-redirect";
 import { clearUserLoggedOut, getAutoLoginCookie, hasUserLoggedOut, setAutoLoginCookie } from "@/web/lib/cookie";
 
 /**
@@ -52,7 +52,7 @@ export default function GithubSignInButton() {
 	const [isLoggedOut, setIsLoggedOut] = useState(false);
 
 	const searchParams = useSearchParams();
-	const callbackUrl = searchParams.get("callbackUrl") ?? PAGES.HOME;
+	const callbackUrl = getSafeCallbackUrl(searchParams.get("callbackUrl"));
 
 	// On mount, hydrate the two cookie-backed flags from the browser.
 	useEffect(() => {

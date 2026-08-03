@@ -1,10 +1,12 @@
+import { getSessionFromHeaders } from "@rentlydev/rnota-auth/session";
 import type { Metadata } from "next";
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
+import { redirect } from "next/navigation";
 
 import AppHeader from "@/web/components/app-header";
 import { AppSidebar } from "@/web/components/app-sidebar";
 import { SidebarInset, SidebarProvider } from "@/web/components/ui/sidebar";
-import { METADATA } from "@/web/lib/constants";
+import { METADATA, PAGES } from "@/web/lib/constants";
 
 export const metadata: Metadata = {
 	title: `${METADATA.title} - Home`,
@@ -12,6 +14,10 @@ export const metadata: Metadata = {
 };
 
 export default async function MainLayout({ children }: React.PropsWithChildren) {
+	// Backstop: don't let proxy.ts be the only gate on the authenticated app shell.
+	const session = await getSessionFromHeaders(await headers());
+	if (!session) redirect(PAGES.LOGIN);
+
 	// Persisting the sidebar state in the cookie.
 	const cookieStore = await cookies();
 	const defaultOpen = cookieStore.get("sidebar:state")?.value === "true";

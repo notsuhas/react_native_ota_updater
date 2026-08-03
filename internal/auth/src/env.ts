@@ -4,11 +4,16 @@ import { z } from "zod";
 const env = createEnv({
 	server: {
 		NODE_ENV: z.enum(["development", "production"]).optional(),
-		AUTH_URL: z.string().url(),
-		AUTH_SECRET: z.string(),
+		AUTH_URL: z.url(),
+		AUTH_SECRET: z.string().min(32, "AUTH_SECRET must be at least 32 characters"),
 		AUTH_GITHUB_ID: z.string(),
 		AUTH_GITHUB_SECRET: z.string(),
-		AUTH_ALLOWED_DOMAIN: z.string().optional(),
+		// Leading "@" is load-bearing: auth.ts matches with endsWith, so "rently.com" would also admit "@evilrently.com"
+		AUTH_ALLOWED_DOMAIN: z
+			.string()
+			.startsWith("@", "AUTH_ALLOWED_DOMAIN must start with '@' (e.g. @rently.com)")
+			.optional()
+			.or(z.literal("")),
 	},
 	client: {},
 	experimental__runtimeEnv: {},

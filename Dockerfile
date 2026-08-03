@@ -1,5 +1,5 @@
 # Base image with Node.js
-FROM node:22-alpine AS base
+FROM node:22.23.2-alpine AS base
 
 # Update package index and install system dependencies
 RUN apk update --no-cache
@@ -83,7 +83,6 @@ EXPOSE 3000
 
 # Environment variables for runtime configuration
 ENV HOSTNAME="0.0.0.0"
-ENV AUTH_TRUST_HOST="true"
 ENV NEXT_TELEMETRY_DISABLED=1
 
 # Start the Next.js server
